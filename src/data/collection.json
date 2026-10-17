@@ -1,0 +1,362 @@
+{
+  "teamInfo": {
+    "name": "Team ALAZ",
+    "shortName": "ALAZ",
+    "number": "",
+    "numericId": 0,
+    "school": "",
+    "district": "",
+    "location": "İzmir, Türkiye",
+    "country": "Türkiye",
+    "email": "alazfrc@gmail.com",
+    "rookieYear": 0,
+    "motto": "Engineering the Future. Building Beyond Limits.",
+    "logo": "/medias/logo.webp",
+    "logoFallback": "/medias/logo.jpg",
+    "logoFull": "/medias/logo-full.webp",
+    "logoFullFallback": "/medias/logo-full.jpg"
+  },
+  "navigation": [
+    { "id": "home", "label": "Home", "href": "/#hero", "code": "01" },
+    { "id": "team", "label": "Team", "href": "/#team", "code": "02" },
+    { "id": "departments", "label": "Departments", "href": "/#departments", "code": "03" },
+    { "id": "mission", "label": "Mission", "href": "/#mission", "code": "04" },
+    { "id": "robot", "label": "Robot", "href": "/robot", "code": "05" },
+    { "id": "outreach", "label": "Outreach", "href": "/outreach", "code": "06" },
+    { "id": "partners", "label": "Partners", "href": "/#partners", "code": "07" },
+    { "id": "crew", "label": "Crew", "href": "/#crew", "code": "08" },
+    { "id": "contact", "label": "Contact", "href": "/#contact", "code": "09" }
+  ],
+  "hero": {
+    "badge": "FIRST ROBOTICS COMPETITION TEAM",
+    "headlineLines": [
+      "ENGINEERING",
+      "THE FUTURE.",
+      "BUILDING",
+      "BEYOND LIMITS."
+    ],
+    "headlineFull": "Engineering the Future. Building Beyond Limits.",
+    "subtitle": "ALAZ is a FIRST Robotics Competition team that brings together science, engineering, and teamwork to develop the technologies of tomorrow. From design and software to mechanical systems and community outreach, we strive to transform our ideas into real engineering solutions. To us, every season is more than a competition. It is an opportunity to challenge our limits, grow together, and redefine what we can achieve.",
+    "primaryCta": {
+      "label": "Explore the Machine",
+      "href": "/robot"
+    },
+    "secondaryCta": {
+      "label": "Join the Crew",
+      "href": "#contact"
+    },
+    "media": "/medias/hero-banner.webp",
+    "mediaFallback": "/medias/hero-banner.jpg",
+    "secondaryMedia": "/medias/hero-full.webp",
+    "secondaryMediaFallback": "/medias/hero-full.jpg",
+    "mediaAlt": "Team ALAZ members",
+    "coordinates": "IZMIR, TR"
+  },
+  "stats": [
+    {
+      "id": "members",
+      "value": "",
+      "suffix": "",
+      "label": "Team Members",
+      "code": "01",
+      "description": "Active student members across departments."
+    },
+    {
+      "id": "events",
+      "value": "",
+      "suffix": "",
+      "label": "Events",
+      "code": "02",
+      "description": "Workshops and educational sessions."
+    },
+    {
+      "id": "reached",
+      "value": "",
+      "suffix": "",
+      "label": "People Reached",
+      "code": "03",
+      "description": "Students and community members engaged."
+    }
+  ],
+  "team": {
+    "id": "team",
+    "code": "01",
+    "title": "Our Team",
+    "tagline": "One Team. One Vision. Infinite Possibilities.",
+    "description": "At the heart of ALAZ is a team of individuals with diverse skills, perspectives, and a shared ambition. Our members collaborate across mechanical engineering, software, electrical systems, design, and communications, developing not only their technical expertise but also their leadership, problem solving, and teamwork skills. We believe that behind every great robot stands a team built on trust, dedication, and a shared vision.",
+    "media": "/medias/team-hands.webp",
+    "mediaFallback": "/medias/team-hands.jpg",
+    "fullMedia": "/medias/team-hands-full.webp",
+    "fullMediaFallback": "/medias/team-hands-full.jpg",
+    "mediaAlt": "Team ALAZ members putting their hands together in unity"
+  },
+  "departments": [
+    {
+      "id": "mechanical",
+      "code": "01",
+      "name": "Mechanical",
+      "description": "Builds the robot and ensures its durability.",
+      "category": "Engineering"
+    },
+    {
+      "id": "electrical",
+      "code": "02",
+      "name": "Electrical",
+      "description": "Wiring, sensors etc.",
+      "category": "Engineering"
+    },
+    {
+      "id": "coding",
+      "code": "03",
+      "name": "Coding",
+      "description": "Prepares the code that drives the system",
+      "category": "Engineering"
+    },
+    {
+      "id": "cad",
+      "code": "04",
+      "name": "CAD",
+      "description": "Designs the parts we are going to use and tests it.",
+      "category": "Engineering"
+    },
+    {
+      "id": "project",
+      "code": "05",
+      "name": "Project",
+      "description": "Makes project ideas and organising.",
+      "category": "Operations"
+    },
+    {
+      "id": "social-media",
+      "code": "06",
+      "name": "Social Media",
+      "description": "Makes our story everlasting.",
+      "category": "Operations"
+    },
+    {
+      "id": "documentation",
+      "code": "07",
+      "name": "Documentation",
+      "description": "Keeps the record of everything we do.",
+      "category": "Operations"
+    },
+    {
+      "id": "sponsorship",
+      "code": "08",
+      "name": "Sponsorship",
+      "description": "Finds sponsors, grants and helps with the budget.",
+      "category": "Operations"
+    },
+    {
+      "id": "awards",
+      "code": "09",
+      "name": "Awards",
+      "description": "Presents our stories to the judges and provides analyses of our journey toward victory.",
+      "category": "Operations"
+    }
+  ],
+  "missionVision": {
+    "id": "mission",
+    "signatureLogo": "/medias/logo.webp",
+    "signatureLogoFallback": "/medias/logo.jpg",
+    "signatureFullLogo": "/medias/logo-full.webp",
+    "signatureCaption": "ALAZ // THE PHOENIX CORE",
+    "mission": {
+      "code": "01",
+      "title": "Our Mission",
+      "tagline": "Engineering with Purpose. Inspiring Through Innovation.",
+      "body": "Our mission is to empower students through hands-on engineering, scientific exploration, and collaborative problem-solving. By participating in the FIRST Robotics Competition, we aim to develop innovative robotic solutions while building technical expertise, leadership, and teamwork. We strive to make STEM education more accessible, share our knowledge with our community, and inspire the next generation to explore the possibilities of science and technology."
+    },
+    "vision": {
+      "code": "02",
+      "title": "Our Vision",
+      "tagline": "Shaping Tomorrow Through Engineering and Innovation.",
+      "body": "Our vision is to become a team recognized for engineering excellence, creative thinking, and meaningful community impact. We aspire to push the boundaries of robotics, establish lasting partnerships, and contribute to a future where technology serves humanity. Through continuous learning, sustainable growth, and a commitment to the values of FIRST, we aim to create an impact that extends far beyond the competition field."
+    }
+  },
+  "robot": {
+    "id": "robot",
+    "code": "01",
+    "title": "Robot",
+    "tagline": "Designed with Purpose. Engineered to Perform.",
+    "precisionStatement": "We Make Our Robots With Precision.",
+    "description": "ALAZ Engineering transforms ideas into functional, reliable, and competitive robotic systems. From CAD design and mechanical fabrication to electrical integration and control software, we focus on balancing performance, reliability, and efficiency. Through testing, analysis, and continuous improvement, we refine every prototype and turn engineering challenges into opportunities for innovation.",
+    "cta": {
+      "label": "Inspect Technical Dossier",
+      "href": "/robot"
+    },
+    "seasonLabel": "FRC SEASON PROTOTYPE",
+    "statusBadge": "ENGINEERING & INTEGRATION PHASE",
+    "heroMedia": "/medias/logo-full.webp",
+    "heroMediaFallback": "/medias/logo-full.jpg",
+    "items": [],
+    "specs": [],
+    "subsystems": []
+  },
+  "outreach": {
+    "id": "outreach",
+    "code": "01",
+    "title": "Outreach",
+    "tagline": "Inspiring Minds. Empowering Communities.",
+    "description": "At ALAZ, we believe that the impact of engineering extends far beyond the competition field. We work to promote STEM education, introduce young people to science and technology, and develop initiatives that address community needs. Through knowledge sharing, volunteering, and collaboration with other teams, we aim to build a community that not only creates technology but also makes a meaningful difference in the world around us.",
+    "cta": {
+      "label": "Explore All Initiatives",
+      "href": "/outreach"
+    },
+    "stats": [],
+    "projects": []
+  },
+  "partners": {
+    "id": "partners",
+    "code": "01",
+    "title": "Partners",
+    "tagline": "Building the Future Through Partnership.",
+    "description": "ALAZ's ambitions grow stronger through partnerships with organizations that share our passion for engineering and innovation. Financial contributions, technical expertise, equipment, and mentorship help us transform ideas into tangible projects. Guided by transparency, mutual trust, and long-term collaboration, we strive to create meaningful partnerships that support the development of science, technology, and the next generation of engineers.",
+    "cta": {
+      "label": "Become a Partner",
+      "href": "#contact"
+    },
+    "sponsors": [],
+    "tiers": []
+  },
+  "media": {
+    "id": "crew",
+    "code": "01",
+    "title": "Media",
+    "tagline": "Beyond the Robot. Behind Every Breakthrough.",
+    "description": "Behind every design, every test, and every competition lies a story worth telling. ALAZ Media captures our team's journey, documenting our engineering processes, competition experiences, and achievements through photography, videos, and digital content. By sharing the moments behind our progress, we aim to showcase our team's identity, celebrate our collective efforts, and bring the spirit of engineering to a wider audience.",
+    "crewGallery": [
+      {
+        "id": "crew-1",
+        "code": "01",
+        "src": "/medias/crew-1.webp",
+        "fallbackJpg": "/medias/crew-1.jpg",
+        "alt": "Team ALAZ department crew",
+        "caption": "CORE ENGINEERING & STRATEGY UNIT",
+        "departmentTag": "ENGINEERING",
+        "aspect": "landscape"
+      },
+      {
+        "id": "crew-2",
+        "code": "02",
+        "src": "/medias/crew-2.webp",
+        "fallbackJpg": "/medias/crew-2.jpg",
+        "alt": "Team ALAZ department crew",
+        "caption": "SYSTEMS & OPERATIONS DIVISION",
+        "departmentTag": "OPERATIONS",
+        "aspect": "landscape"
+      },
+      {
+        "id": "crew-3",
+        "code": "03",
+        "src": "/medias/crew-3.webp",
+        "fallbackJpg": "/medias/crew-3.jpg",
+        "alt": "Team ALAZ mechanical and CAD members",
+        "caption": "FABRICATION & CAD COLLECTIVE",
+        "departmentTag": "MECHANICAL // CAD",
+        "aspect": "landscape"
+      },
+      {
+        "id": "crew-4",
+        "code": "04",
+        "src": "/medias/crew-4.webp",
+        "fallbackJpg": "/medias/crew-4.jpg",
+        "alt": "Team ALAZ software and electrical team members",
+        "caption": "AUTONOMOUS & ELECTRICAL UNIT",
+        "departmentTag": "CODING // ELECTRICAL",
+        "aspect": "landscape"
+      },
+      {
+        "id": "crew-5",
+        "code": "05",
+        "src": "/medias/crew-5.webp",
+        "fallbackJpg": "/medias/crew-5.jpg",
+        "alt": "Team ALAZ outreach, sponsorship, and media crew",
+        "caption": "IMPACT, AWARDS & MEDIA CREW",
+        "departmentTag": "OUTREACH // MEDIA",
+        "aspect": "landscape"
+      },
+      {
+        "id": "crew-6",
+        "code": "06",
+        "src": "/medias/crew-6.webp",
+        "fallbackJpg": "/medias/crew-6.jpg",
+        "alt": "Team ALAZ project and documentation specialists",
+        "caption": "PROJECT & DOCUMENTATION ARCHIVE TEAM",
+        "departmentTag": "PROJECT // DOCS",
+        "aspect": "landscape"
+      },
+      {
+        "id": "hero-full",
+        "code": "07",
+        "src": "/medias/hero-full.webp",
+        "fallbackJpg": "/medias/hero-full.jpg",
+        "alt": "Full Team ALAZ roster",
+        "caption": "FULL ROSTER",
+        "departmentTag": "TEAM ALAZ",
+        "aspect": "portrait"
+      },
+      {
+        "id": "team-hands-full",
+        "code": "08",
+        "src": "/medias/team-hands-full.webp",
+        "fallbackJpg": "/medias/team-hands-full.jpg",
+        "alt": "Team ALAZ hands united",
+        "caption": "ONE TEAM. ONE VISION. INFINITE POSSIBILITIES.",
+        "departmentTag": "UNITY",
+        "aspect": "portrait"
+      }
+    ],
+    "socials": [
+      {
+        "id": "instagram",
+        "platform": "Instagram",
+        "handle": "@teamalazfrc",
+        "href": "https://www.instagram.com/teamalazfrc/",
+        "code": "01"
+      },
+      {
+        "id": "x",
+        "platform": "X",
+        "handle": "@frcteamalaz",
+        "href": "https://x.com/frcteamalaz?s=11",
+        "code": "02"
+      },
+      {
+        "id": "tiktok",
+        "platform": "TikTok",
+        "handle": "@teamalazfrc2",
+        "href": "https://www.tiktok.com/@teamalazfrc2",
+        "code": "03"
+      },
+      {
+        "id": "youtube",
+        "platform": "YouTube",
+        "handle": "@TeamALAZFRC",
+        "href": "https://www.youtube.com/@TeamALAZFRC",
+        "code": "04"
+      }
+    ]
+  },
+  "contact": {
+    "id": "contact",
+    "code": "01",
+    "title": "Contact",
+    "tagline": "Have an Idea? Let's Build Something Together.",
+    "description": "ALAZ welcomes students, mentors, organizations, and potential partners who share our enthusiasm for science, technology, and innovation. Whether you are interested in sponsorship opportunities, technical collaboration, STEM initiatives, or learning more about our team, we would be glad to hear from you. We believe every great project begins with an idea, and we look forward to shaping the future through new connections and shared ambitions.",
+    "email": "alazfrc@gmail.com",
+    "locationLabel": "İzmir, Türkiye",
+    "schoolLabel": "",
+    "departmentOptions": [
+      "Mechanical",
+      "Electrical",
+      "Coding",
+      "CAD",
+      "Project",
+      "Social Media",
+      "Documentation",
+      "Sponsorship",
+      "Awards"
+    ]
+  }
+}

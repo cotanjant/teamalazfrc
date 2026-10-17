@@ -1,0 +1,78 @@
+"use client";
+
+import React from "react";
+import {
+  Menu,
+  Compass,
+  LogOut,
+  ChevronRight,
+} from "lucide-react";
+import { useAdminShell } from "./AdminShellContext";
+import { useAdminAuth } from "../AdminGuard";
+import { startAdminTour } from "../tour";
+
+export function AdminHeader() {
+  const {
+    currentSectionInfo,
+    setIsMobileSidebarOpen,
+  } = useAdminShell();
+
+  const { logout } = useAdminAuth();
+
+  return (
+    <header className="h-16 border-b border-[#1A1A1A] bg-[#000000]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between shrink-0 z-30">
+      {/* Left Side: Mobile Menu Button + Breadcrumbs & Title */}
+      <div className="flex items-center gap-3 min-w-0">
+        <button
+          onClick={() => setIsMobileSidebarOpen(true)}
+          className="p-2 -ml-2 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#141414] md:hidden transition-colors"
+          aria-label="Menüyü Aç"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        <div className="flex flex-col min-w-0">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#777777] uppercase tracking-wider">
+            <span className="hover:text-[#A0A0A0] transition-colors">ALAZ</span>
+            <ChevronRight className="w-3 h-3 text-[#555555]" />
+            <span className="hover:text-[#A0A0A0] transition-colors">Yönetim</span>
+            <ChevronRight className="w-3 h-3 text-[#555555]" />
+            <span className="text-[#FF7800] truncate font-semibold">
+              {currentSectionInfo.label}
+            </span>
+          </div>
+
+          {/* Page Title */}
+          <h1 className="text-sm sm:text-base font-bold text-white tracking-tight truncate">
+            {currentSectionInfo.label}
+          </h1>
+        </div>
+      </div>
+
+      {/* Right Side: Guide Button + Logout */}
+      <div className="flex items-center gap-2 sm:gap-3">
+        {/* Guide Button */}
+        <button
+          id="admin-tour-restart-button"
+          onClick={() => startAdminTour()}
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-none text-xs font-mono font-medium text-[#CCCCCC] bg-[#000000] hover:bg-[#141414] hover:text-white border border-[#1A1A1A] transition-colors uppercase tracking-wider"
+          title="Kullanım rehberini ve interaktif turu başlat"
+        >
+          <Compass className="w-3.5 h-3.5 text-[#FF7800]" />
+          <span className="hidden sm:inline">Rehberi Başlat</span>
+        </button>
+
+        {/* Logout Button */}
+        <button
+          onClick={logout}
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-none text-xs font-mono font-medium text-rose-400 hover:text-white hover:bg-rose-950/40 border border-rose-900/40 transition-colors uppercase tracking-wider"
+          title="Oturumu güvenle sonlandır"
+        >
+          <LogOut className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Çıkış Yap</span>
+        </button>
+      </div>
+    </header>
+  );
+}

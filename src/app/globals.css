@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  --color-ground: #000000;
+  --color-surface: #000000;
+  --color-surface-2: #0A0A0A;
+  --color-ink: #E8E8E8;
+  --color-muted: #666666;
+  --color-line: #1A1A1A;
+  --color-accent: #FF7800;
+  --color-accent-2: #FFD21C;
+  --color-ember: #E83A0A;
+
+  --ease-ignite: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-ground: var(--color-ground);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-line: var(--color-line);
+  --color-accent: var(--color-accent);
+  --color-accent-2: var(--color-accent-2);
+  --color-ember: var(--color-ember);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Global Sharp Geometry Rule */
+*,
+*::before,
+*::after {
+  border-radius: 0px !important;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-ground);
+  color: var(--color-ink);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Selection Highlight */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-ground);
+}
+
+::-moz-selection {
+  background-color: var(--color-accent);
+  color: var(--color-ground);
+}
+
+/* Accessible Keyboard Focus Outline */
+:focus-visible {
+  outline: 1px solid var(--color-accent) !important;
+  outline-offset: 2px;
+}
+
+/* Lenis Smooth Scroll Resets */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Typography & Utility Classes Aligned with DESIGN-SPEC.md */
+.font-display {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.font-technical {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* GSAP ScrollTrigger Blur-Reveal State */
+.blur-reveal {
+  will-change: transform, opacity, filter;
+}
+
+/* Reduced Motion Guardrails */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
