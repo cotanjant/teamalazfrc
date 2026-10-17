@@ -17,15 +17,60 @@
     "logoFullFallback": "/medias/logo-full.jpg"
   },
   "navigation": [
-    { "id": "home", "label": "Home", "href": "/#hero", "code": "01" },
-    { "id": "team", "label": "Team", "href": "/#team", "code": "02" },
-    { "id": "departments", "label": "Departments", "href": "/#departments", "code": "03" },
-    { "id": "mission", "label": "Mission", "href": "/#mission", "code": "04" },
-    { "id": "robot", "label": "Robot", "href": "/robot", "code": "05" },
-    { "id": "outreach", "label": "Outreach", "href": "/outreach", "code": "06" },
-    { "id": "partners", "label": "Partners", "href": "/#partners", "code": "07" },
-    { "id": "crew", "label": "Crew", "href": "/#crew", "code": "08" },
-    { "id": "contact", "label": "Contact", "href": "/#contact", "code": "09" }
+    {
+      "id": "home",
+      "label": "Home",
+      "href": "/#hero",
+      "code": "01"
+    },
+    {
+      "id": "team",
+      "label": "Team",
+      "href": "/#team",
+      "code": "02"
+    },
+    {
+      "id": "departments",
+      "label": "Departments",
+      "href": "/#departments",
+      "code": "03"
+    },
+    {
+      "id": "mission",
+      "label": "Mission",
+      "href": "/#mission",
+      "code": "04"
+    },
+    {
+      "id": "robot",
+      "label": "Robot",
+      "href": "/robot",
+      "code": "05"
+    },
+    {
+      "id": "outreach",
+      "label": "Outreach",
+      "href": "/outreach",
+      "code": "06"
+    },
+    {
+      "id": "partners",
+      "label": "Partners",
+      "href": "/#partners",
+      "code": "07"
+    },
+    {
+      "id": "crew",
+      "label": "Crew",
+      "href": "/#crew",
+      "code": "08"
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "href": "/#contact",
+      "code": "09"
+    }
   ],
   "hero": {
     "badge": "FIRST ROBOTICS COMPETITION TEAM",
@@ -335,6 +380,13 @@
         "handle": "@TeamALAZFRC",
         "href": "https://www.youtube.com/@TeamALAZFRC",
         "code": "04"
+      },
+      {
+        "id": "social-1792244098942",
+        "platform": "Instagram",
+        "handle": "@teamalaz12368",
+        "href": "https://instagram.com/teamalaz12368",
+        "code": "SOC-05"
       }
     ]
   },
