@@ -49,7 +49,7 @@ export interface HeroContent {
   secondaryMedia: string;
   secondaryMediaFallback: string;
   mediaAlt: string;
-  coordinates: string;
+  coordinates?: string;
 }
 
 export interface StatItem {
@@ -168,9 +168,9 @@ export interface OutreachContent {
 
 export interface PartnerSlotItem {
   id: string;
-  code: string;
+  code?: string;
   name: string;
-  tier: "Founding Institution" | "Title Partner" | "Gold Partner" | "Silver Partner" | "In-Kind Supporter" | string;
+  tier?: "Founding Institution" | "Title Partner" | "Gold Partner" | "Silver Partner" | "In-Kind Supporter" | string;
   role: string;
   href?: string;
   placeholder?: boolean;

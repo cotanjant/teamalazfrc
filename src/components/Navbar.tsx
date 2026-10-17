@@ -72,11 +72,18 @@ export function Navbar() {
 
   const navItems =
     Array.isArray(siteCollection.navigation) && siteCollection.navigation.length > 0
-      ? siteCollection.navigation.map((item) => ({
-          label: item.label,
-          ariaLabel: `Go to ${item.label} section`,
-          link: item.href,
-        }))
+      ? siteCollection.navigation
+          .filter((item) => item.href !== "/#crew" && item.id !== "crew")
+          .map((item) => ({
+            label: item.label,
+            ariaLabel: `Go to ${item.label} section`,
+            link:
+              item.href === "/robot"
+                ? "/#robot"
+                : item.href === "/outreach"
+                  ? "/#outreach"
+                  : item.href,
+          }))
       : MENU_ITEMS;
 
   return (
@@ -112,7 +119,7 @@ export function Navbar() {
             key={item.label}
             href={item.link}
             aria-label={item.ariaLabel}
-            className="font-mono text-xs uppercase tracking-wider text-[#A0A0A0] hover:text-[#FF7800] transition-colors relative py-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#FF7800]"
+            className="font-mono text-xs uppercase tracking-wider text-[#A0A0A0] hover:text-white transition-colors relative py-1.5 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:w-full after:origin-left after:scale-x-0 after:bg-[#FF7800] after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#FF7800]"
           >
             {item.label}
           </Link>

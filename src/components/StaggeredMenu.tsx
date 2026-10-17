@@ -734,7 +734,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           opacity: var(--sm-num-opacity, 0);
         }
 
-        /* Mobile Fullscreen with 0 offset or gaps */
+        /* Mobile Fullscreen Responsive Optimization */
         @media (max-width: 1024px) {
           .staggered-menu-portal-root .staggered-menu-panel {
             width: 100vw !important;
@@ -742,9 +742,39 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             right: 0 !important;
             top: 0 !important;
             bottom: 0 !important;
+            height: 100dvh !important;
             max-width: 100% !important;
             border-left: none !important;
-            padding: 5.5em 1.5em 2em 1.5em !important;
+            padding: calc(env(safe-area-inset-top, 0px) + 4.5rem) 1.5rem calc(env(safe-area-inset-bottom, 0px) + 2rem) 1.5rem !important;
+          }
+          .staggered-menu-portal-root .sm-panel-inner {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            height: 100% !important;
+            gap: 1.5rem !important;
+          }
+          .staggered-menu-portal-root .sm-panel-list {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-evenly !important;
+            flex: 1 1 auto !important;
+            gap: 0 !important;
+          }
+          .staggered-menu-portal-root .sm-panel-item {
+            font-size: clamp(2rem, 8vh, 3.25rem) !important;
+            line-height: 1.15 !important;
+            padding-right: 1.8em !important;
+            display: inline-block !important;
+          }
+          .staggered-menu-portal-root .sm-panel-list[data-numbering] .sm-panel-item::after {
+            font-size: clamp(12px, 2.2vh, 16px) !important;
+            top: 0.18em !important;
+          }
+          .staggered-menu-portal-root .sm-socials {
+            margin-top: 0 !important;
+            padding-top: 1.25rem !important;
+            flex-shrink: 0 !important;
           }
           .staggered-menu-portal-root .sm-prelayers {
             width: 100vw !important;

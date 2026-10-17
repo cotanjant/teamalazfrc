@@ -14,36 +14,24 @@ export function PartnersSection() {
   const rawTiers = Array.isArray(partners.tiers) && partners.tiers.length > 0 ? partners.tiers : [];
   const rawSponsors = (Array.isArray(partners.sponsors) ? partners.sponsors : []) as Array<{
     id?: string;
-    tier?: string;
     name?: string;
     description?: string;
   }>;
 
-  // Combine or prioritize tiers (from admin) while maintaining backward compatibility
-  const partnerItems = rawTiers.length > 0
-    ? rawTiers.filter((item) => item && item.name && item.name.trim().length > 0)
-    : rawSponsors.filter((item) => item && item.name && item.name.trim().length > 0).map((s) => ({
-        id: s.id || "",
-        code: s.id || "",
-        tier: s.tier || "Partner",
-        name: s.name || "",
-        role: s.description || "",
-        href: undefined,
-      }));
+  const partnerItems =
+    rawTiers.length > 0
+      ? rawTiers.filter((item) => item && item.name && item.name.trim().length > 0)
+      : rawSponsors
+          .filter((item) => item && item.name && item.name.trim().length > 0)
+          .map((s) => ({
+            id: s.id || "",
+            name: s.name || "",
+            role: s.description || "",
+            href: undefined,
+          }));
 
-  // Group by tier
-  const tierGroups = {
-    title: partnerItems.filter((p) => p.tier === "Title Partner" || p.tier === "Founding Institution"),
-    gold: partnerItems.filter((p) => p.tier === "Gold Partner"),
-    silver: partnerItems.filter((p) => p.tier === "Silver Partner"),
-    other: partnerItems.filter(
-      (p) =>
-        p.tier !== "Title Partner" &&
-        p.tier !== "Founding Institution" &&
-        p.tier !== "Gold Partner" &&
-        p.tier !== "Silver Partner"
-    ),
-  };
+  const ctaLabel = partners.cta?.label || "Become a Partner";
+  const ctaHref = partners.cta?.href || "#contact";
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -89,149 +77,103 @@ export function PartnersSection() {
       id="partners"
       ref={sectionRef}
       aria-labelledby="partners-heading"
-      className="relative bg-[#000000] py-20 md:py-28 lg:py-32 overflow-hidden"
+      className="relative border-t border-[#141414] bg-[#000000] py-20 md:py-28 lg:py-32"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12">
-        <div className="max-w-[70ch]">
-          <p className="partner-reveal blur-reveal font-mono text-xs uppercase tracking-[0.2em] text-[#FF7800]">
-            {partners.title || "Partners"}
-          </p>
-          <h2
-            id="partners-heading"
-            className="partner-reveal blur-reveal mt-3 text-3xl font-bold tracking-[-0.02em] leading-[1.08] text-[#E8E8E8] sm:text-4xl md:text-5xl"
-          >
-            {partners.tagline}
-          </h2>
-          <p className="partner-reveal blur-reveal mt-6 text-base leading-[1.65] text-[#E8E8E8]/80">
-            {partners.description}
-          </p>
-        </div>
-
-        {/* Tier Group 1: Title & Founding Partners */}
-        {tierGroups.title.length > 0 && (
-          <div className="mt-14">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#FF7800] block mb-4">
-              TITLE &amp; FOUNDING PARTNERS
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {tierGroups.title.map((partner, idx) => (
-                <div
-                  key={partner.code || idx}
-                  className="partner-reveal border border-[#1A1A1A] bg-[#000000] p-8 sm:p-10 transition-all duration-300 hover:border-[#FF7800] hover:shadow-[0_0_24px_rgba(255,120,0,0.15)] flex flex-col justify-between"
+        {partnerItems.length > 0 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <div className="lg:col-span-5 lg:sticky lg:top-28">
+              <p className="partner-reveal blur-reveal font-mono text-xs uppercase tracking-[0.2em] text-[#FF7800]">
+                {partners.title || "Partners"}
+              </p>
+              <h2
+                id="partners-heading"
+                className="partner-reveal blur-reveal mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.02em] leading-[1.08] text-[#E8E8E8]"
+              >
+                {partners.tagline}
+              </h2>
+              <p className="partner-reveal blur-reveal mt-6 text-base md:text-lg leading-[1.65] text-[#E8E8E8]/80">
+                {partners.description}
+              </p>
+              <div className="partner-reveal blur-reveal mt-8">
+                <a
+                  href={ctaHref}
+                  className="group relative inline-flex min-h-[52px] items-center justify-center overflow-hidden bg-[#FF7800] px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505] transition-all duration-300 hover:bg-[#FF9020] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7800] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-mono text-xs text-[#FF7800] uppercase tracking-wider font-semibold">
-                        {partner.tier}
-                      </span>
-                      {partner.href && (
-                        <a
-                          href={partner.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-xs text-[#737373] hover:text-[#FF7800] transition-colors"
-                        >
-                          ↗
-                        </a>
+                  <span className="relative z-10">{ctaLabel}</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 w-full">
+              <div className="divide-y divide-[#1A1A1A] border-y border-[#1A1A1A]">
+                {partnerItems.map((partner, idx) => {
+                  const hasLink = Boolean(
+                    partner.href &&
+                      partner.href.trim().length > 0 &&
+                      partner.href.trim() !== "https://"
+                  );
+
+                  return (
+                    <div
+                      key={partner.id || `${partner.name}-${idx}`}
+                      className="partner-reveal blur-reveal group relative flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3 sm:gap-8 py-8 sm:py-10 px-4 sm:px-6 transition-colors duration-300 hover:bg-[#070707]"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#FF7800] origin-top scale-y-0 transition-transform duration-300 ease-out group-hover:scale-y-100"
+                      />
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[-0.02em] text-[#E8E8E8] transition-all duration-300 ease-out group-hover:translate-x-2 group-hover:text-white">
+                        {hasLink ? (
+                          <a
+                            href={partner.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="focus:outline-none focus-visible:underline"
+                          >
+                            {partner.name}
+                          </a>
+                        ) : (
+                          partner.name
+                        )}
+                      </h3>
+                      {partner.role && partner.role.trim().length > 0 && (
+                        <p className="text-sm sm:text-base text-[#A0A0A0] sm:text-right max-w-[40ch] leading-relaxed transition-colors duration-300 group-hover:text-[#D0D0D0]">
+                          {partner.role}
+                        </p>
                       )}
                     </div>
-                    <h3 className="text-2xl font-bold text-[#E8E8E8] tracking-tight">
-                      {partner.name}
-                    </h3>
-                    {partner.role && (
-                      <p className="mt-3 text-sm text-[#A0A0A0] leading-relaxed">
-                        {partner.role}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                  );
+                })}
+              </div>
             </div>
           </div>
-        )}
-
-        {/* Tier Group 2: Gold Partners */}
-        {tierGroups.gold.length > 0 && (
-          <div className="mt-10">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#FFD21C] block mb-4">
-              GOLD PARTNERS
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {tierGroups.gold.map((partner, idx) => (
-                <div
-                  key={partner.code || idx}
-                  className="partner-reveal border border-[#1A1A1A] bg-[#000000] p-6 transition-all duration-300 hover:border-[#FFD21C]/60 hover:shadow-[0_0_18px_rgba(255,210,28,0.1)] flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-mono text-xs text-[#FFD21C] uppercase tracking-wider">
-                        {partner.tier}
-                      </span>
-                      {partner.href && (
-                        <a
-                          href={partner.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-xs text-[#737373] hover:text-[#FFD21C] transition-colors"
-                        >
-                          ↗
-                        </a>
-                      )}
-                    </div>
-                    <h3 className="text-lg font-bold text-[#E8E8E8]">
-                      {partner.name}
-                    </h3>
-                    {partner.role && (
-                      <p className="mt-2 text-xs text-[#A0A0A0] leading-relaxed">
-                        {partner.role}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-end border-y border-[#1A1A1A] py-12 sm:py-16">
+            <div className="lg:col-span-8 max-w-[68ch]">
+              <p className="partner-reveal blur-reveal font-mono text-xs uppercase tracking-[0.2em] text-[#FF7800]">
+                {partners.title || "Partners"}
+              </p>
+              <h2
+                id="partners-heading"
+                className="partner-reveal blur-reveal mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.02em] leading-[1.08] text-[#E8E8E8]"
+              >
+                {partners.tagline}
+              </h2>
+              <p className="partner-reveal blur-reveal mt-6 text-base md:text-lg leading-[1.65] text-[#E8E8E8]/80">
+                {partners.description}
+              </p>
             </div>
-          </div>
-        )}
 
-        {/* Tier Group 3: Silver & In-Kind Partners */}
-        {(tierGroups.silver.length > 0 || tierGroups.other.length > 0) && (
-          <div className="mt-10">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#A0A0A0] block mb-4">
-              SUPPORTERS &amp; CONTRIBUTORS
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {[...tierGroups.silver, ...tierGroups.other].map((partner, idx) => (
-                <div
-                  key={partner.code || idx}
-                  className="partner-reveal border border-[#1A1A1A] bg-[#000000] p-5 transition-all duration-300 hover:border-[#FF7800]/40 flex flex-col justify-between"
+            <div className="lg:col-span-4 flex lg:justify-end w-full lg:w-auto">
+              <div className="partner-reveal blur-reveal w-full sm:w-auto">
+                <a
+                  href={ctaHref}
+                  className="group relative inline-flex w-full sm:w-auto min-h-[52px] items-center justify-center overflow-hidden bg-[#FF7800] px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505] transition-all duration-300 hover:bg-[#FF9020] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7800] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="font-mono text-[11px] text-[#A0A0A0] uppercase tracking-wider">
-                        {partner.tier}
-                      </span>
-                      {partner.href && (
-                        <a
-                          href={partner.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-xs text-[#737373] hover:text-[#FF7800] transition-colors"
-                        >
-                          ↗
-                        </a>
-                      )}
-                    </div>
-                    <h3 className="text-base font-semibold text-[#E8E8E8]">
-                      {partner.name}
-                    </h3>
-                    {partner.role && (
-                      <p className="mt-1.5 text-xs text-[#737373] leading-relaxed">
-                        {partner.role}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                  <span className="relative z-10">{ctaLabel}</span>
+                </a>
+              </div>
             </div>
           </div>
         )}
@@ -241,3 +183,4 @@ export function PartnersSection() {
 }
 
 export default PartnersSection;
+

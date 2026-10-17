@@ -39,7 +39,7 @@ export function Footer() {
         <div className="relative z-10 -mb-20">
           <div className="relative overflow-hidden h-80 sm:h-96 border border-[#1A1A1A] border-t-2 border-t-[#FF7800] bg-[#0A0A0A] shadow-2xl group">
             <Image
-              src="/medias/crew-5.webp"
+              src="/medias/hero-full.webp"
               alt="Team ALAZ Crew"
               fill
               sizes="(max-width: 1400px) 100vw, 1400px"

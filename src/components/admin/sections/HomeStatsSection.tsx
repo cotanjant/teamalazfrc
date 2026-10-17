@@ -220,25 +220,14 @@ export function HomeStatsSection() {
           </div>
         </CardHeader>
         <CardContent className="space-y-4 pt-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="field-hero-badge" className="text-xs text-zinc-400">{t("homeStats.badgeLabel")}</Label>
-              <Input
-                id="field-hero-badge"
-                value={data.hero.badge}
-                onChange={(e) => updateHero("badge", e.target.value)}
-                className="bg-[#000000] border-[#1A1A1A] text-sm text-zinc-200 h-9 rounded-none focus-visible:ring-1 focus-visible:ring-[#FF7800]"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="field-hero-coordinates" className="text-xs text-zinc-400">{t("homeStats.coordinatesLabel")}</Label>
-              <Input
-                id="field-hero-coordinates"
-                value={data.hero.coordinates}
-                onChange={(e) => updateHero("coordinates", e.target.value)}
-                className="bg-[#000000] border-[#1A1A1A] text-sm font-mono text-zinc-200 h-9 rounded-none focus-visible:ring-1 focus-visible:ring-[#FF7800]"
-              />
-            </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="field-hero-badge" className="text-xs text-zinc-400">{t("homeStats.badgeLabel")}</Label>
+            <Input
+              id="field-hero-badge"
+              value={data.hero.badge}
+              onChange={(e) => updateHero("badge", e.target.value)}
+              className="bg-[#000000] border-[#1A1A1A] text-sm text-zinc-200 h-9 rounded-none focus-visible:ring-1 focus-visible:ring-[#FF7800]"
+            />
           </div>
 
           <div className="space-y-1.5">
@@ -260,6 +249,41 @@ export function HomeStatsSection() {
               onChange={(e) => updateHero("subtitle", e.target.value)}
               className="bg-[#000000] border-[#1A1A1A] text-sm text-zinc-200 leading-relaxed rounded-none focus-visible:ring-1 focus-visible:ring-[#FF7800]"
             />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+            <div className="space-y-2">
+              <Label className="text-xs text-[#A3A3A3] uppercase tracking-wider font-mono">
+                Birincil Buton Metni
+              </Label>
+              <Input
+                value={data.hero.primaryCta?.label || ""}
+                onChange={(e) =>
+                  updateHero("primaryCta", {
+                    label: e.target.value,
+                    href: data.hero.primaryCta?.href || "/#robot",
+                  })
+                }
+                placeholder="Örn: Explore the Machine"
+                className="bg-[#121212] border-[#262626] text-white font-mono text-sm h-10 focus-visible:ring-[#FF7800]"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-xs text-[#A3A3A3] uppercase tracking-wider font-mono">
+                İkincil Buton Metni
+              </Label>
+              <Input
+                value={data.hero.secondaryCta?.label || ""}
+                onChange={(e) =>
+                  updateHero("secondaryCta", {
+                    label: e.target.value,
+                    href: data.hero.secondaryCta?.href || "/#contact",
+                  })
+                }
+                placeholder="Örn: Join the Crew"
+                className="bg-[#121212] border-[#262626] text-white font-mono text-sm h-10 focus-visible:ring-[#FF7800]"
+              />
+            </div>
           </div>
         </CardContent>
       </Card>

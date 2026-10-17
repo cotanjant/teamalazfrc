@@ -82,7 +82,7 @@ export function StatsBar() {
       aria-label="Team Statistics"
       className="w-full rounded-none border-y border-[#141414] bg-[#000000]"
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div
           className={`grid grid-cols-1 divide-y md:divide-y-0 md:divide-x divide-[#1A1A1A] ${
             activeStats.length === 1

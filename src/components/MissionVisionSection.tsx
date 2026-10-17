@@ -57,7 +57,7 @@ export function MissionVisionSection() {
       id="mission"
       ref={sectionRef}
       aria-labelledby="mission-vision-heading"
-      className="relative bg-[#000000] min-h-screen py-24 flex flex-col justify-center"
+      className="relative border-y border-[#1A1A1A] bg-[#000000] min-h-screen py-24 flex flex-col justify-center"
     >
       {/* Background WebGL2 Grainient fire wave canvas */}
       <div className="absolute inset-0 pointer-events-none opacity-45 overflow-hidden">
@@ -81,7 +81,7 @@ export function MissionVisionSection() {
         <h2 id="mission-vision-heading" className="sr-only">
           Misyon & Vizyon
         </h2>
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
           {/* Left Column: Our Mission */}
           <div className="mv-card-reveal blur-reveal flex flex-col justify-between border border-[#1A1A1A] border-t-2 border-t-[#FF7800] bg-[#0A0A0A]/90 backdrop-blur-sm p-8 md:p-12 shadow-2xl transition-all duration-300 hover:border-[#FF7800]/60 hover:shadow-[0_0_30px_rgba(255,120,0,0.15)]">
             <div>
@@ -98,7 +98,7 @@ export function MissionVisionSection() {
           </div>
 
           {/* Right Column: Our Vision */}
-          <div className="mv-card-reveal blur-reveal flex flex-col justify-between border border-[#1A1A1A] border-t-2 border-t-[#FFD21C] bg-[#0A0A0A]/90 backdrop-blur-sm p-8 md:p-12 shadow-2xl transition-all duration-300 hover:border-[#FFD21C]/60 hover:shadow-[0_0_30px_rgba(255,210,28,0.15)]">
+          <div className="mv-card-reveal blur-reveal lg:mt-12 flex flex-col justify-between border border-[#1A1A1A] border-t-2 border-t-[#FFD21C] bg-[#0A0A0A]/90 backdrop-blur-sm p-8 md:p-12 shadow-2xl transition-all duration-300 hover:border-[#FFD21C]/60 hover:shadow-[0_0_30px_rgba(255,210,28,0.15)]">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#FFD21C]">
                 {vision.title || "Our Vision"}

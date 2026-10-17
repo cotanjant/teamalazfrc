@@ -56,7 +56,7 @@ export function AboutSection() {
       id="team"
       ref={sectionRef}
       aria-labelledby="team-heading"
-      className="relative bg-[#000000] py-20 md:py-28 lg:py-32 overflow-hidden"
+      className="relative border-t border-[#141414] bg-[#000000] py-20 md:py-28 lg:py-32 overflow-hidden"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
@@ -79,14 +79,14 @@ export function AboutSection() {
 
           {/* Right Column: Authentic Team Photography */}
           <div className="about-reveal blur-reveal lg:col-span-5">
-            <div className="relative border border-[#1A1A1A] bg-[#050505] p-3 shadow-2xl transition-all duration-300 hover:border-[#FF7800]/50 hover:shadow-[0_0_30px_rgba(255,120,0,0.12)]">
+            <div className="group relative border border-[#1A1A1A] bg-[#050505] p-3 shadow-2xl transition-all duration-300 hover:border-[#FF7800]/50 hover:shadow-[0_0_30px_rgba(255,120,0,0.12)]">
               <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#1A1A1A] bg-[#0A0A0A]">
                 <Image
                   src={team.media || "/medias/team-hands.webp"}
                   alt={team.mediaAlt || "Team ALAZ members"}
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
               </div>
             </div>

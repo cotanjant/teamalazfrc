@@ -6,8 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAdminStore } from "@/lib/admin/useAdminStore";
 import { useAdminTranslation } from "@/lib/i18n/useAdminTranslation";
 import { AdminDataTable, Column } from "@/components/admin/ui/AdminDataTable";
@@ -38,28 +36,11 @@ export function PartnersSection() {
   const saveEdit = () => {
     if (editingIndex === null) return;
     if (editingPartner.name !== undefined) updatePartner(editingIndex, "name", editingPartner.name);
-    if (editingPartner.tier !== undefined) updatePartner(editingIndex, "tier", editingPartner.tier);
     if (editingPartner.role !== undefined) updatePartner(editingIndex, "role", editingPartner.role);
     if (editingPartner.href !== undefined) updatePartner(editingIndex, "href", editingPartner.href);
     if (editingPartner.code !== undefined) updatePartner(editingIndex, "code", editingPartner.code);
     setEditingIndex(null);
     setEditingPartner({});
-  };
-
-  const tierBadgeColor = (tier: string) => {
-    switch (tier) {
-      case "Founding Institution":
-        return "border-amber-500/40 text-amber-300 bg-amber-950/25 rounded-none font-mono text-[10px]";
-      case "Title Partner":
-        return "border-[#FF7800]/40 text-[#FF7800] bg-[#FF7800]/10 rounded-none font-mono text-[10px]";
-      case "Gold Partner":
-        return "border-[#FFD21C]/40 text-[#FFD21C] bg-[#FFD21C]/10 rounded-none font-mono text-[10px]";
-      case "Silver Partner":
-        return "border-zinc-500/40 text-zinc-300 bg-zinc-800/40 rounded-none font-mono text-[10px]";
-      case "In-Kind Supporter":
-      default:
-        return "border-zinc-700 text-zinc-400 bg-zinc-900/40 rounded-none font-mono text-[10px]";
-    }
   };
 
   const columns: Column<PartnerSlotItem>[] = [
@@ -89,34 +70,6 @@ export function PartnersSection() {
               </a>
             )}
           </div>
-        ),
-    },
-    {
-      key: "tier",
-      title: "Kademe (Tier)",
-      width: "180px",
-      sortable: true,
-      render: (item, idx) =>
-        editingIndex === idx ? (
-          <Select
-            value={editingPartner.tier ?? item.tier}
-            onValueChange={(val) => setEditingPartner((prev) => ({ ...prev, tier: val }))}
-          >
-            <SelectTrigger className="h-7 text-xs bg-[#000000] border-[#262626] rounded-none text-zinc-200">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="bg-[#0A0A0A] border-[#1A1A1A] text-zinc-200 rounded-none">
-              <SelectItem value="Founding Institution">Founding Institution</SelectItem>
-              <SelectItem value="Title Partner">Title Partner</SelectItem>
-              <SelectItem value="Gold Partner">Gold Partner</SelectItem>
-              <SelectItem value="Silver Partner">Silver Partner</SelectItem>
-              <SelectItem value="In-Kind Supporter">In-Kind Supporter</SelectItem>
-            </SelectContent>
-          </Select>
-        ) : (
-          <Badge variant="outline" className={tierBadgeColor(item.tier)}>
-            {item.tier}
-          </Badge>
         ),
     },
     {
@@ -203,7 +156,7 @@ export function PartnersSection() {
         </CardContent>
       </Card>
 
-      {/* 2. Sponsor ve Paydaşlar Tablosu (DataTable with Tier Filter) */}
+      {/* 2. Sponsor ve Paydaşlar Tablosu */}
       <div>
         <AdminDataTable
           data={data.partners.tiers}
@@ -211,27 +164,12 @@ export function PartnersSection() {
           title={t("partners.tiersTitle")}
           subtitle={t("partners.tiersDescription")}
           icon={<Award className="w-4 h-4" />}
-          searchPlaceholder="Destekçilerde ara (isim, kademe, rol, web bağlantısı)..."
-          searchKeys={["name", "tier", "role", "href"]}
-          filters={[
-            {
-              key: "tier",
-              label: "Sponsorluk Kademesi",
-              allLabel: "Tüm Kademeler",
-              options: [
-                { label: "Founding Institution", value: "Founding Institution" },
-                { label: "Title Partner", value: "Title Partner" },
-                { label: "Gold Partner", value: "Gold Partner" },
-                { label: "Silver Partner", value: "Silver Partner" },
-                { label: "In-Kind Supporter", value: "In-Kind Supporter" },
-              ],
-            },
-          ]}
+          searchPlaceholder="Destekçilerde ara (isim, rol, web bağlantısı)..."
+          searchKeys={["name", "role", "href"]}
           addLabel="Yeni Sponsor Ekle"
           onAdd={() =>
             addPartner({
               name: "Yeni Sponsor Kurum",
-              tier: "Silver Partner",
               role: "Teknik ve Donanım Desteği",
               href: "https://",
               code: `PARTNER-${String(data.partners.tiers.length + 1).padStart(2, "0")}`,
@@ -247,7 +185,7 @@ export function PartnersSection() {
           onDelete={(_, originalIndex) => removePartner(originalIndex)}
           deleteConfirmTitle="Sponsoru Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.name}' (${item.tier}) kaydını listeden silmek istediğinizden emin misiniz?`
+            `'${item.name}' kaydını listeden silmek istediğinizden emin misiniz?`
           }
           onReorder={reorderPartner}
           renderCustomRowActions={(_, originalIndex) =>

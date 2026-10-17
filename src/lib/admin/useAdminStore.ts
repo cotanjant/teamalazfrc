@@ -621,7 +621,7 @@ export const pureMutators = {
       id: partner?.id || `partner-${Date.now()}`,
       code: partner?.code || nextCode,
       name: partner?.name || "New Partner / Institution",
-      tier: partner?.tier || "Gold Partner",
+      tier: partner?.tier ?? "",
       role: partner?.role || "Technical Equipment & Mentorship Supporter",
       href: partner?.href ?? "",
       placeholder: partner?.placeholder,

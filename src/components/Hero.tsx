@@ -3,23 +3,79 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GradientASCII } from "@/components/GradientASCII";
+import { AsciiPhoenixCore } from "@/components/AsciiPhoenixCore";
 import { siteCollection } from "@/data/collection";
 
-const DEFAULT_ROUTING_BUTTONS = [
-  { label: "Team", href: "#team" },
-  { label: "Departments", href: "#departments" },
-  { label: "Mission", href: "#mission" },
-  { label: "Robot", href: "#robot" },
-  { label: "Outreach", href: "#outreach" },
-  { label: "Partners", href: "#partners" },
-  { label: "Contact", href: "#contact" },
-];
+function deriveHeadlineLines(
+  headlineFull?: string,
+  headlineLines?: string[]
+): [string, string] {
+  if (headlineFull && headlineFull.trim().length > 0) {
+    const full = headlineFull.trim();
+    if (full.includes("\n")) {
+      const parts = full
+        .split("\n")
+        .map((p) => p.trim())
+        .filter(Boolean);
+      return [parts[0] || "", parts.slice(1).join(" ") || ""];
+    }
+    if (full.includes(". ")) {
+      const splitIdx = full.indexOf(". ") + 1;
+      return [full.slice(0, splitIdx).trim(), full.slice(splitIdx).trim()];
+    }
+    const words = full.split(" ");
+    const mid = Math.ceil(words.length / 2);
+    return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
+  }
+  if (headlineLines && headlineLines.length > 0) {
+    const line1 = headlineLines.slice(0, 2).join(" ");
+    const line2 = headlineLines.slice(2).join(" ");
+    return [
+      line1 || "Engineering the Future.",
+      line2 || "Building Beyond Limits.",
+    ];
+  }
+  return ["Engineering the Future.", "Building Beyond Limits."];
+}
+
+function deriveLeadSentence(subtitle?: string): string {
+  if (!subtitle) return "";
+  const match = subtitle.match(/^[^.!?]+[.!?]/);
+  return match ? match[0].trim() : subtitle;
+}
+
+function splitText(line: string) {
+  const words = line.split(" ");
+  return words.map((word, wordIdx) => (
+    <span
+      key={`${line}-${word}-${wordIdx}`}
+      className="inline-block whitespace-nowrap"
+    >
+      {word.split("").map((char, charIdx) => (
+        <span
+          key={`${word}-${charIdx}`}
+          className="hero-char inline-block will-change-transform"
+        >
+          {char}
+        </span>
+      ))}
+      {wordIdx < words.length - 1 && (
+        <span className="inline-block">&nbsp;</span>
+      )}
+    </span>
+  ));
+}
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const line1Ref = useRef<HTMLDivElement>(null);
+  const line2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     const section = sectionRef.current;
     if (!section) return;
 
@@ -33,7 +89,7 @@ export function Hero() {
 
     const ctx = gsap.context(() => {
       const chars = gsap.utils.toArray<HTMLElement>(".hero-char");
-      const metaEls = gsap.utils.toArray<HTMLElement>(".hero-meta");
+      const fadeEls = gsap.utils.toArray<HTMLElement>(".hero-fade");
 
       gsap.set(chars, {
         opacity: 0,
@@ -42,7 +98,7 @@ export function Hero() {
         color: "#FF7800",
       });
 
-      gsap.set(metaEls, {
+      gsap.set(fadeEls, {
         opacity: 0,
         y: 20,
         filter: "blur(8px)",
@@ -54,24 +110,21 @@ export function Hero() {
         },
       });
 
-      // Character blur-in reveal
       tl.to(
         chars,
         {
           opacity: 1,
           yPercent: 0,
           filter: "blur(0px)",
-          color: (_i, target: HTMLElement) =>
-            target.dataset.accent === "true" ? "#FF7800" : "#E8E8E8",
+          color: "#FFFFFF",
           duration: 0.8,
           stagger: 0.015,
         },
         0.05
       );
 
-      // Meta elements reveal (eyebrow, body, action buttons)
       tl.to(
-        metaEls,
+        fadeEls,
         {
           opacity: 1,
           y: 0,
@@ -81,160 +134,174 @@ export function Hero() {
         },
         0.35
       );
+
+      if (line1Ref.current) {
+        gsap.to(line1Ref.current, {
+          xPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+      }
+
+      if (line2Ref.current) {
+        gsap.to(line2Ref.current, {
+          xPercent: 8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+      }
     }, section);
 
     return () => ctx.revert();
   }, []);
 
-  const { hero, navigation } = siteCollection;
+  const { hero } = siteCollection;
 
-  // Dynamically derive headline lines from headlineFull if present, fallback to headlineLines
-  const deriveHeadlineLines = (): [string, string] => {
-    if (hero?.headlineFull && hero.headlineFull.trim().length > 0) {
-      const full = hero.headlineFull.trim();
-      if (full.includes("\n")) {
-        const parts = full.split("\n").map((p) => p.trim()).filter(Boolean);
-        return [parts[0] || "", parts.slice(1).join(" ") || ""];
-      }
-      if (full.includes(". ")) {
-        const splitIdx = full.indexOf(". ") + 1;
-        return [full.slice(0, splitIdx).trim(), full.slice(splitIdx).trim()];
-      }
-      const words = full.split(" ");
-      const mid = Math.ceil(words.length / 2);
-      return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
-    }
-    if (hero?.headlineLines && hero.headlineLines.length > 0) {
-      const line1 = hero.headlineLines.slice(0, 2).join(" ");
-      const line2 = hero.headlineLines.slice(2).join(" ");
-      return [line1 || "Engineering the Future.", line2 || "Building Beyond Limits."];
-    }
-    return ["Engineering the Future.", "Building Beyond Limits."];
-  };
+  const [headlineLine1, headlineLine2] = deriveHeadlineLines(
+    hero.headlineFull,
+    hero.headlineLines
+  );
 
-  const [headlineLine1, headlineLine2] = deriveHeadlineLines();
+  const leadSentence = deriveLeadSentence(hero.subtitle);
 
-  const badgeText = hero?.badge || "ALAZ";
-  const subtitleText =
-    hero?.subtitle ||
-    "ALAZ is a FIRST Robotics Competition team that brings together science, engineering, and teamwork to develop the technologies of tomorrow.";
+  const primaryLabel = hero.primaryCta?.label || "Explore the Machine";
+  const rawPrimaryHref = hero.primaryCta?.href || "/#robot";
+  const primaryHref =
+    rawPrimaryHref === "/robot"
+      ? "/#robot"
+      : rawPrimaryHref === "/outreach"
+      ? "/#outreach"
+      : rawPrimaryHref;
 
-  const routingButtons =
-    Array.isArray(navigation) && navigation.length > 0
-      ? navigation
-          .filter((item) => item.href.startsWith("#") || item.href.startsWith("/#"))
-          .map((item) => ({ label: item.label, href: item.href }))
-      : DEFAULT_ROUTING_BUTTONS;
-
-  const renderSplitLine = (line: string, isAccentLine: boolean) => {
-    const words = line.split(" ");
-    return words.map((word, wordIdx) => (
-      <span
-        key={`${line}-${word}-${wordIdx}`}
-        className="inline-block whitespace-nowrap"
-      >
-        {word.split("").map((char, charIdx) => (
-          <span
-            key={`${word}-${charIdx}`}
-            data-accent={isAccentLine ? "true" : "false"}
-            className={`hero-char inline-block will-change-transform ${
-              isAccentLine ? "text-[#FF7800]" : "text-[#E8E8E8]"
-            }`}
-          >
-            {char}
-          </span>
-        ))}
-        {wordIdx < words.length - 1 && (
-          <span className="inline-block">&nbsp;</span>
-        )}
-      </span>
-    ));
-  };
+  const secondaryLabel = hero.secondaryCta?.label || "Join the Crew";
+  const rawSecondaryHref = hero.secondaryCta?.href || "/#contact";
+  const secondaryHref =
+    rawSecondaryHref === "/robot"
+      ? "/#robot"
+      : rawSecondaryHref === "/outreach"
+      ? "/#outreach"
+      : rawSecondaryHref;
 
   return (
     <section
       id="hero"
       ref={sectionRef}
       aria-label="Team ALAZ Hero"
-      className="relative min-h-[100dvh] bg-[#000000] flex flex-col justify-center items-center overflow-hidden py-24 sm:py-28"
+      className="relative w-full h-[calc(100dvh-4rem)] max-h-[calc(100dvh-4rem)] bg-[#000000] overflow-hidden"
     >
-      {/* Full-bleed dynamic WebGL2 ASCII gradient canvas with rich fire stops & mouse reactivity */}
-      <div className="absolute inset-0 z-0 pointer-events-auto opacity-85">
+      {/* Full-bleed WebGL2 Eclipse Solar Corona ASCII Canvas */}
+      <div className="absolute inset-0 z-0 pointer-events-auto">
         <GradientASCII
-          colors={["#5A0F05", "#8F1B0A", "#C92A0A", "#E83A0A", "#FF4B0B", "#FF7800", "#FFB000", "#FFD21C"]}
-          shape="horizon"
-          cellSize={14}
-          density={1.2}
-          glyphOpacity={0.85}
-          glow={0.5}
-          speed={0.9}
-          gradientOpacity={0.9}
+          colors={[
+            "#5A0F05",
+            "#8F1B0A",
+            "#C92A0A",
+            "#E83A0A",
+            "#FF4B0B",
+            "#FF7800",
+            "#FFB000",
+            "#FFD21C",
+          ]}
+          shape="eclipse"
+          characters=" .:-=+*#%@ALAZ"
+          clickEffect="burst"
           mouseInteraction={true}
-          scrambleRadius={120}
+          scrambleRadius={0.18}
+          cellSize={13}
+          density={1.2}
+          glyphOpacity={0.9}
+          glow={0.65}
+          speed={0.9}
+          gradientOpacity={0.92}
         />
       </div>
 
-      {/* Subtle dark vignette overlay for high contrast text readability */}
+      {/* Subtle corner/edge vignette preserving 100% eclipse brilliance in the center */}
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#000000]/70 via-[#000000]/50 to-[#000000]/90"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[1] [background:radial-gradient(circle_at_center,transparent_25%,#000000_90%)]"
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 48%, rgba(0,0,0,0.65) 88%, rgba(0,0,0,0.88) 100%), linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 74%, rgba(0,0,0,0.78) 100%)",
+        }}
       />
 
-      {/* Main Hero Content */}
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 pt-12 lg:pt-8">
-        <div className="max-w-4xl flex flex-col items-start justify-center">
-          {/* Eyebrow: Badge */}
-          <div className="hero-meta inline-flex items-center gap-2 border border-[#FF7800]/40 bg-[#000000]/90 px-3.5 py-1.5 mb-6 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 bg-[#FF7800] rounded-none animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#FF7800] font-semibold">
-              {badgeText}
+      {/* Animated ASCII Phoenix Emblem (from art.txt) Inside the Black Hole */}
+      <AsciiPhoenixCore />
+
+      {/* Four-Quadrant Diagonal Tension Poster Layout — Strictly 1 Screen (calc(100dvh - 4rem)) on PC & Mobile */}
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-12 h-full pt-5 sm:pt-7 lg:pt-8 pb-5 sm:pb-7 lg:pb-8 flex flex-col justify-between pointer-events-none">
+        {/* Top Row: Top-Left Monumental Anchor */}
+        <div className="w-full shrink-0 pointer-events-auto">
+          <div className="hero-fade blur-reveal mb-2 sm:mb-3 flex items-center gap-3">
+            <span aria-hidden="true" className="h-[2px] w-6 bg-[#FF7800]" />
+            <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-[#FF7800]">
+              {hero.badge}
             </span>
           </div>
 
-          {/* Headline: Engineering the Future. Building Beyond Limits. */}
           <h1
             aria-label={`${headlineLine1} ${headlineLine2}`}
-            className="font-bold tracking-[-0.04em] leading-[0.95] text-4xl sm:text-6xl md:text-7xl xl:text-[80px] text-[#E8E8E8] uppercase mb-8 select-none"
+            className="contents"
           >
-            <span aria-hidden="true" className="block">
-              <span className="block overflow-hidden pb-[0.04em]">
-                {renderSplitLine(headlineLine1, false)}
-              </span>
-              <span className="block overflow-hidden pb-[0.04em] mt-1 sm:mt-2">
-                {renderSplitLine(headlineLine2, true)}
-              </span>
-            </span>
+            <div
+              ref={line1Ref}
+              className="max-w-[16ch] lg:max-w-[20ch] text-[clamp(2.35rem,9vw,3.65rem)] sm:text-[clamp(3.15rem,min(6.2vw,9.5dvh),6.85rem)] font-bold uppercase tracking-[-0.02em] leading-[1.02] text-white will-change-transform"
+            >
+              {splitText(headlineLine1)}
+            </div>
+            <span className="sr-only"> {headlineLine2}</span>
           </h1>
+        </div>
 
-          {/* Dynamic Body Copy */}
-          <p className="hero-meta text-base sm:text-lg md:text-xl text-[#B0B0B0] leading-[1.65] max-w-[72ch] mb-10">
-            {subtitleText}
-          </p>
+        {/* Middle Equator: Flexibly absorbs remaining vertical space so total height never exceeds 1 screen */}
+        <div className="flex-1 min-h-0 pointer-events-none" />
 
-          {/* Destination Pills */}
-          <div className="hero-meta w-full flex flex-col gap-3">
-            <span className="font-mono text-xs uppercase tracking-[0.16em] text-[#707070]">
-              EXPLORE SECTIONS
-            </span>
-            <div className="flex flex-wrap gap-2.5 w-full">
-              {routingButtons.map((btn) => (
-                <Link
-                  key={btn.href}
-                  href={btn.href}
-                  className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-none border border-[#1A1A1A] bg-[#000000]/80 hover:bg-[#141414] hover:border-[#FF7800] hover:shadow-[0_0_18px_rgba(255,120,0,0.18)] backdrop-blur-sm transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7800]"
-                >
-                  <span className="font-mono text-xs font-medium uppercase tracking-wider text-[#D0D0D0] group-hover:text-white transition-colors">
-                    {btn.label}
-                  </span>
-                  <span className="font-mono text-xs text-[#666666] group-hover:text-[#FF7800] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    ↗
-                  </span>
-                </Link>
-              ))}
+        {/* Bottom Row: Bottom-Left Compact Lead & CTAs + Bottom-Right Monumental Anchor */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-end border-t border-white/10 pt-3.5 sm:pt-5 lg:pt-6 shrink-0">
+          {/* Bottom-Left (lg:col-span-5) */}
+          <div className="lg:col-span-5 order-2 lg:order-1 space-y-3 sm:space-y-4 pointer-events-auto">
+            <p className="hero-fade blur-reveal text-xs sm:text-sm md:text-base leading-[1.5] text-[#E8E8E8]/85 max-w-[46ch] line-clamp-2 sm:line-clamp-3">
+              {leadSentence}
+            </p>
+
+            <div className="hero-fade blur-reveal grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-4">
+              <Link
+                href={primaryHref}
+                className="group relative overflow-hidden inline-flex min-h-[44px] sm:min-h-[50px] items-center justify-center bg-[#FF7800] px-3 sm:px-7 py-2.5 sm:py-3.5 text-center font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-[#050505] transition-all duration-300 hover:bg-[#FF9020] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7800] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-white/25 transition-transform duration-500 ease-out group-hover:translate-x-0"
+                />
+                <span className="relative z-10">{primaryLabel}</span>
+              </Link>
+              <Link
+                href={secondaryHref}
+                className="inline-flex min-h-[44px] sm:min-h-[50px] items-center justify-center border border-white/20 bg-black/75 backdrop-blur-md px-3 sm:px-7 py-2.5 sm:py-3.5 text-center font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-[#E8E8E8] transition-all duration-300 hover:border-[#FF7800] hover:text-white active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7800] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000]"
+              >
+                {secondaryLabel}
+              </Link>
+            </div>
+          </div>
+
+          {/* Bottom-Right (lg:col-span-7) */}
+          <div className="lg:col-span-7 order-1 lg:order-2 lg:text-right pointer-events-auto">
+            <div
+              ref={line2Ref}
+              aria-hidden="true"
+              className="text-[clamp(2.35rem,9vw,3.65rem)] sm:text-[clamp(3.15rem,min(6.2vw,9.5dvh),6.85rem)] font-bold uppercase tracking-[-0.02em] leading-[1.02] text-[#E8E8E8] will-change-transform"
+            >
+              {splitText(headlineLine2)}
             </div>
           </div>
         </div>
