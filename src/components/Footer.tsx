@@ -53,7 +53,7 @@ export function Footer() {
             <div className="absolute inset-0 flex flex-col justify-between p-8 sm:p-12 md:p-16">
               <div>
                 <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#FFFFFF] max-w-2xl leading-tight">
-                  Have an Idea? Let&apos;s Build Something Together.
+                  {siteCollection.contact.tagline || "Join the Team & Support Our Mission"}
                 </h2>
               </div>
 
