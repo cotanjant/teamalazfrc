@@ -14,19 +14,19 @@ export interface NavSectionItem {
 export const ADMIN_SECTIONS: NavSectionItem[] = [
   {
     id: "home",
-    label: "Genel & İstatistikler",
+    label: "Genel & Istatistikler",
     shortLabel: "Genel",
     code: "01",
     iconName: "LayoutDashboard",
-    description: "Ana sayfa başlıkları, temel metinler ve takım istatistikleri",
+    description: "Ana sayfa basliklari, temel metinler ve takim istatistikleri",
   },
   {
     id: "team",
-    label: "Takım & Departmanlar",
-    shortLabel: "Takım",
+    label: "Takim & Departmanlar",
+    shortLabel: "Takim",
     code: "02",
     iconName: "Users",
-    description: "Takım hikayesi, departman yapıları ve çalışma alanları",
+    description: "Takim hikayesi, departman yapilari ve calisma alanlari",
   },
   {
     id: "mission",
@@ -34,7 +34,7 @@ export const ADMIN_SECTIONS: NavSectionItem[] = [
     shortLabel: "Misyon",
     code: "03",
     iconName: "Compass",
-    description: "ALAZ felsefesi, vizyon hedefleri ve kurumsal duruş",
+    description: "ALAZ felsefesi, vizyon hedefleri ve kurumsal durus",
   },
   {
     id: "robot",
@@ -42,7 +42,7 @@ export const ADMIN_SECTIONS: NavSectionItem[] = [
     shortLabel: "Robot",
     code: "04",
     iconName: "Cpu",
-    description: "Robot teknik özellikleri, ağırlık, şasi ve alt mekanizmalar",
+    description: "Robot teknik ozellikleri, agirlik, sasi ve alt mekanizmalar",
   },
   {
     id: "outreach",
@@ -54,19 +54,19 @@ export const ADMIN_SECTIONS: NavSectionItem[] = [
   },
   {
     id: "partners",
-    label: "Destekçiler & Sponsorlar",
+    label: "Destekciler & Sponsorlar",
     shortLabel: "Sponsor",
     code: "06",
     iconName: "Handshake",
-    description: "Sponsorluk kademeleri, kurumsal destekçiler ve ortaklıklar",
+    description: "Sponsorluk kademeleri, kurumsal destekciler ve ortakliklar",
   },
   {
     id: "contact",
-    label: "İletişim",
-    shortLabel: "İletişim",
+    label: "Iletisim",
+    shortLabel: "Iletisim",
     code: "07",
     iconName: "Mail",
-    description: "Resmi iletişim kanalları, e-posta ve lokasyon bilgileri",
+    description: "Resmi iletisim kanallari, e-posta ve lokasyon bilgileri",
   },
 ];
 

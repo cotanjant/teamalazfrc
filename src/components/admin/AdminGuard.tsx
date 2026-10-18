@@ -81,14 +81,14 @@ export function AdminGuard({ children }: AdminGuardProps) {
 
       const data = await res.json();
       if (!res.ok || !data.success) {
-        setError(data.error || "Kimlik doğrulama başarısız. Lütfen şifrenizi kontrol edin.");
+        setError(data.error || "Kimlik dogrulama basarisiz. Lutfen sifrenizi kontrol edin.");
         return;
       }
 
       setIsAuthenticated(true);
       setPassword("");
     } catch {
-      setError("Doğrulama servisine bağlanırken ağ veya sunucu hatası oluştu.");
+      setError("Dogrulama servisine baglanirken ag veya sunucu hatasi olustu.");
     } finally {
       setLoading(false);
     }
@@ -130,7 +130,7 @@ export function AdminGuard({ children }: AdminGuardProps) {
               ALAZ <span className="text-[#FF7800] text-sm font-mono font-semibold">{"//"} 12368</span>
             </h1>
             <p className="text-xs text-[#A0A0A0] mt-1.5 font-mono">
-              İçerik Yönetim Merkezi Yetkili Girişi
+              Icerik Yonetim Merkezi Yetkili Girisi
             </p>
           </div>
 
@@ -138,17 +138,17 @@ export function AdminGuard({ children }: AdminGuardProps) {
             <CardHeader className="pb-3 pt-5 px-5 border-b border-[#141414]">
               <CardTitle className="text-sm font-semibold text-[#E8E8E8] flex items-center gap-2">
                 <Lock className="w-3.5 h-3.5 text-[#FF7800]" />
-                Yönetici Erişimi
+                Yonetici Erisimi
               </CardTitle>
               <CardDescription className="text-xs text-[#666666]">
-                Düzenleme paneline erişmek için erişim anahtarınızı girin.
+                Duzenleme paneline erismek icin erisim anahtarinizi girin.
               </CardDescription>
             </CardHeader>
             <CardContent className="px-5 py-5">
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="admin-pass" className="text-xs font-mono uppercase text-[#A0A0A0]">
-                    Güvenlik Şifresi
+                    Guvenlik Sifresi
                   </Label>
                   <Input
                     id="admin-pass"
@@ -178,7 +178,7 @@ export function AdminGuard({ children }: AdminGuardProps) {
                   disabled={loading}
                   className="w-full bg-[#FF7800] hover:bg-[#ff8a1e] text-black font-semibold text-xs tracking-wider uppercase h-10 rounded-md transition-colors font-mono shadow-[0_0_15px_rgba(255,120,0,0.25)]"
                 >
-                  {loading ? "Doğrulanıyor..." : "Giriş Yap"}
+                  {loading ? "Dogrulaniyor..." : "Giris Yap"}
                 </Button>
               </form>
             </CardContent>
@@ -189,7 +189,7 @@ export function AdminGuard({ children }: AdminGuardProps) {
               href="/"
               className="text-xs font-mono text-[#666666] hover:text-[#FF7800] transition-colors uppercase tracking-wider"
             >
-              ← Ana Sayfaya Dön
+              ← Ana Sayfaya Don
             </Link>
           </div>
         </div>

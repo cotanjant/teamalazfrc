@@ -28,12 +28,12 @@ export const metadata: Metadata = {
     template: "%s | Team ALAZ",
   },
   description:
-    "Team ALAZ is a FIRST Robotics Competition team from İzmir uniting science, engineering, and teamwork to develop the technologies of tomorrow.",
+    "Team ALAZ is a FIRST Robotics Competition team from Izmir uniting science, engineering, and teamwork to develop the technologies of tomorrow.",
   keywords: [
     "Team ALAZ",
     "ALAZ FRC",
     "FIRST Robotics Competition",
-    "İzmir FRC",
+    "Izmir FRC",
     "Robotics Turkey",
     "STEM Education",
   ],
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: "Team ALAZ",
     title: "Team ALAZ | FIRST Robotics Competition",
     description:
-      "Engineering the Future. Building Beyond Limits. FIRST Robotics Competition Team from İzmir, Türkiye.",
+      "Engineering the Future. Building Beyond Limits. FIRST Robotics Competition Team from Izmir, Turkiye.",
     images: [
       {
         url: "/medias/logo-full.jpg",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Team ALAZ | FIRST Robotics Competition",
     description:
-      "Engineering the Future. Building Beyond Limits. FIRST Robotics Competition Team from İzmir, Türkiye.",
+      "Engineering the Future. Building Beyond Limits. FIRST Robotics Competition Team from Izmir, Turkiye.",
     images: ["/medias/logo-full.jpg"],
   },
   robots: {
@@ -78,11 +78,11 @@ const jsonLd = {
   name: "Team ALAZ",
   alternateName: "ALAZ FRC",
   description:
-    "FIRST Robotics Competition Team based in İzmir, Türkiye.",
+    "FIRST Robotics Competition Team based in Izmir, Turkiye.",
   email: "alazfrc@gmail.com",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "İzmir",
+    addressLocality: "Izmir",
     addressCountry: "TR",
   },
   sameAs: [

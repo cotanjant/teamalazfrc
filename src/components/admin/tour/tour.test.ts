@@ -64,7 +64,7 @@ assert.strictEqual(TOUR_CONFIG.allowKeyboardControl, true, "Keyboard control mus
 assert.strictEqual(TOUR_CONFIG.skipMissingElement, true, "Missing elements must be skipped silently");
 assert.strictEqual(TOUR_CONFIG.allowClose, true, "Allow close must be enabled");
 assert.strictEqual(TOUR_CONFIG.popoverClass, "alaz-tour-popover", "Custom popover class must be alaz-tour-popover");
-assert.strictEqual(TOUR_CONFIG.nextBtnText, "İleri", "Next button text must be Turkish 'İleri'");
+assert.strictEqual(TOUR_CONFIG.nextBtnText, "Ileri", "Next button text must be Turkish 'Ileri'");
 assert.strictEqual(TOUR_CONFIG.prevBtnText, "Geri", "Previous button text must be Turkish 'Geri'");
 assert.strictEqual(TOUR_CONFIG.doneBtnText, "Tamamla", "Done button text must be Turkish 'Tamamla'");
 assert.strictEqual(TOUR_CONFIG.closeBtnLabel, "Rehberi Kapat", "Close button text must be Turkish 'Rehberi Kapat'");

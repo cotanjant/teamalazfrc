@@ -64,21 +64,21 @@ function AdminDashboard() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#1A1A1A]">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-xl font-bold tracking-tight text-white">İçerik Yönetimi</h1>
+            <h1 className="text-xl font-bold tracking-tight text-white">Icerik Yonetimi</h1>
             <div id="admin-dirty-badge" className="inline-flex items-center">
               {isDirty ? (
                 <Badge variant="outline" className="border-amber-500/40 text-amber-400 font-mono text-[10px] rounded-none">
-                  {changedFieldsCount} Değişiklik
+                  {changedFieldsCount} Degisiklik
                 </Badge>
               ) : (
                 <Badge variant="outline" className="border-[#1A1A1A] text-zinc-500 font-mono text-[10px] rounded-none">
-                  Kayıtlar Güncel
+                  Kayitlar Guncel
                 </Badge>
               )}
             </div>
           </div>
           <p className="text-xs text-zinc-400 mt-0.5">
-            Canlı web sitesi metinlerini, menü bağlantılarını, robot bilgilerini ve sponsorları yönetin.
+            Canli web sitesi metinlerini, menu baglantilarini, robot bilgilerini ve sponsorlari yonetin.
           </p>
         </div>
 
@@ -111,7 +111,7 @@ function AdminDashboard() {
             disabled={isSaving}
             className="w-full sm:w-auto bg-[#FF7800] hover:bg-[#ff8a1e] text-black font-semibold text-xs tracking-wider uppercase h-9 px-6 transition-colors shadow-[0_0_15px_rgba(255,120,0,0.25)] rounded-none"
           >
-            {isSaving ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
+            {isSaving ? "Kaydediliyor..." : "Degisiklikleri Kaydet"}
           </Button>
         </div>
       </div>
