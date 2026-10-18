@@ -1,7 +1,78 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { ART_LINES } from '@/data/art';
+
+// 68 lines x 100 columns from C:\Users\Efe\Desktop\art.txt
+const ART_LINES: readonly string[] = [
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@+%@*=*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%-:%@#@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@%@@*:#*+*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+::*+*@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@*@*--#++*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+:.:==%@%*@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@#-*=::=++*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+:.::.*%*.*@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@*@@-.-=::-+=+%@@%*+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%@@@@@=..=..-*:.*@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@*=%:..-:::===*@#+==*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**%@@%:..:..:=..*@+#@@%@@@@@@@",
+  "@@@@@@@@@@@@@@%:#=:::::.:=:-*==:-**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#:=#%=..-...=:..**:=@*@@@@@@@",
+  "@@@@@@@@@@@@@@:-=:::-::.:::*=:::=:#*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=..:=..-...=:..:#::%*@@@@@@@",
+  "@@@@@@@@@@@*@=::-=::::..:.:-.::=:#+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#:..::.::..=:...*::===@@@@@@",
+  "@@@@@@@@@@@-+:::-.=.:::.-.:..:-.=-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+%=..:-.:::.=:.:.=::-=:%*@@@@",
+  "@@@@@@@@@@%-+::.=:--::.:-.:.-:-::%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*=+:.::.:::::::.:=::--:#+@@@@",
+  "@@@@@@@@@@*:+:.:=:-#-::=-.:.=::.+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=--::-.-:-:.::.:=::=::=*@@@@",
+  "@@@@@@@@@*-:%::.=--+-:=-::..==:.%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#-:=:-.---.:--:--:-=::=#@@@@",
+  "@@@@@@@@#--:*=:::-%==-:=:*:.-*::@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%::=::--=:.-=:.=::==:--%@@@@",
+  "@@@@@@=%=::.:#:::*%%+**+=#---*=:%@@@@@@@@@@@@*@@@@@@@@@@@@@@@@@@@@@@@@@@%==--:*==.::=:--::=::-:@@*@@",
+  "@@@@@@==%-.-.=#:-:#@#=:*--#.=+::%@%@@@@@@@@*=-*%@@@@@@@@@@@@@@@@@@@@@@@@#:%-=**+-..====-==-:--+@@=@@",
+  "@@@@@@-.==.:::=+-:-*@=::#-%.=*..=%@@@@@@@@@=:--%@@@@@@@@@@@@@@@@@@@@@@@%..#=.**==:-#=====-::--%@+=@@",
+  "@@@@@@*::--.:::===-:#%=.=-=**%:::=#@@@@@@@@#=:=*%%@%%%@+@@@@@@@@@@@@@@#:::==+%:=:-*%*===:::--+#*.#%%",
+  "@@@**%*:.:=:.-::--*%.:#=:#==@@=:-:-*@@@@@@@#*-::+*=**+==#@@@@@@@@@**#=.::.==+.:==*+.*=+---::===::%%%",
+  "@@@%:=*-=.:=:..::-%@+.-*****+##%+:.:+=@@@@@@==--:::==-+-+@@@@@@@%:=*:-+==:==:.-*=..:#===-::++-.:=+=%",
+  "@@@%:::*--..==:..==%.:+==#@%=*-*+=-::-:@@@@@#*=:::.:...::#@@@@@@*:...:.*+.--:*#:....#+=-:===:.:=*:*%",
+  "@@@@%-::-==...::::%=:+**+=*:*%==*=#-=.:%@@@%*+==:.....:-:+@@@@@@=::-=--**.=*#%=:.:-%@%===+=::-==--*%",
+  "@@@@%#=:::-=::-::-%*.:-+#*@*::=*::::::+%@@@+:==-::::---*#=.*@@@@----::+::=*--*=-=+:.#*=*=:-:==-=:+@#",
+  "@@@@@**+-::---::=.:=*=*++#%::==-:-=-=..%@@@#**====-:=*@@@@%*@@@@-:----:.:+==-===:.:#%==:---=---:=-:#",
+  "@@@@@@#==-:...:=+*:.:-=*#%=::-=::--=:.:@@@@*+**===:::#@@@@@@@@@@=::-::::=*=:=:=-:=*=::==-==-----:.*%",
+  "@@@@@@@#:..:==:.:+#+:::-=*%*==-:::--:::@@@@@@@***==::::=*%@@@@@@+:--:--=##:=*===:.::+%+=-=--==:..*%@",
+  "@@@@@@@@%*::..::---.:::::=**=:---=:=::=@@@@@@@@@*:-::::.-:+@@@@@=::-:+-::-:-*+===*#*#*+++==-:::+*@@@",
+  "@@@@@@@*===....::-=#%+...+#%*:-:*::..-:@@@@@@@@@--.. .::.-:-@@@@:-:-=-:*#%:*+:::...=%+-:.:=*==*%@@@@",
+  "@@@@@@@+==*+-::...:=*#..:-=:..*===::..:-%@@@@@%*: :. :.. ::-@@=::-:=***=*+=*%%*=:#@@%**+==+****%@@@@",
+  "@@@@@@@@*-:-==**+=:-+*#**=*%*======:=::::=++===. ::.  ...=::-:.:==:=++++#**=====#*+*==++**#*+==#@@@@",
+  "@@@@@@@@@@@#*=-::::-=%%*=.:*=:::=%#=:+=::-:--:...:...... =--::.:--==:#*=..#%#==#*::::::--=--=*%@@@@@",
+  "@@@@@@@@@@@@@@%##***=::..::--:...:#*+--=:-:=-=-=..:...::+:==-:-++-+=%+=:-=*@*-::::-==++***%@@@@@@@@@",
+  "@@@@@@@@@@@%*+===-:.:::=-::.:%%%%::::*%%=%+%*%===+:=:::::+%***==%**%==%***===**+++====+++**#%@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@#*=:...:-=*=+*@@:-*.+:#+==*%--#-:-=-*-%=**%+#.*::%%%#*=+-:-:*%@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@%*-:-+===-.:=+*@%@@%%@:%=##@@%:#=-:*=+*@=#:#.%*+@@@@##==+=*+=+**%@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@%%%%%*+=::-=--=+:===**-=@@@@@%-@*:+:++=#=*####+@%%+*+===*=:---=#*#%@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@%%*+=-=++:.:-=::==**::==:=#:-:@%+%==*=%.+=*===*=+===-==::====-:=#@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@%#+-:::---::-:=#=::%=-+:--*:%++=#=+*=:#:==:+==-==-==-:.:=+###%%@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@#***#%%#+-=-:*%=:-%@::#-**%.%:*-=++=+**--=-%*=::+::===*+===+%@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@%%@*=*@*-:+%%:-@:#%+.::#*#:::*%#:-:=:%@#+.:#=:#%#*@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#=-:.:#%%%#*==.==+%-:+:%%*#*@@@+::-::*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@*==-*=::@@%:.:--:.--@-+-*::=%%:.=...:+@%*@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@=--===*%@==:=+@%#*-:::-==:..::%-=-:..-==#@:...+@#*:=**=#@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@-::-----:.%%=::::-==::::=-:.-.=-:*-.-:..:-:....=*::.:..::-@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@%:--==*%%=-:=@%==:.::::=-=-..:=.-::.=-:::...:.:=:*:::=*#=::.@%@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@*=*-==%%#-:-@@@@%+=--:=--:..-:=:*=::.:===::::=-*%#:.:::.+-::*%@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@%**-=+=:=*%@#=+=++::-:.....=--=:-=::...::.::*%%%@%@%@@:-:=-:=@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@+=-=:::*=*+..:---:.....:==@=:=:.-=:.=..:.......==+-%::-=:=#@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@%*==-...:::--........::=-@-::--::*:=..--.::--=:==+=:.---%@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@#*::::..:::..::...:-=+#-:.:=.=:::*#-=:...:.::----:::-*@@@@%@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@#-:..:--=--==-::--==+#=::::-==--:-:+@##-:::::-:-==-====--+#@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@%*=+#*++=::-===#@@*:-::-=%:=:--.-:-%@@%*-::.-=**+=-%@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@%%%@**+::*+%=:::=---::==#-+=*=:--===#*::*+==:-=+*%**@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@%@*:-@*@%:==--++-===*=**==:%:=-+-#::##=%@@:::**%*%@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*::@@@%:=--*=*:*=*++==:::.#:+==*=::%::@@%-==*@%%@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*:=:@@:=.==%+*-**=+-==::=:-%*+==%@:-.:-@@=--#@*@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%-:-=**#:*+%@#=*%-++*:#%=:==+=-=%=--**=@====#%*@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#=::--==+*@%%+*+-++*:#@@%:===+*@%=-:-:--:-#@#@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+==+*%@@@%*******=-:+=:-=-=++++:::::.-##+@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%##**++*=--::---+@@@@+:::=#%@@%@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%***++=-::=::#@%#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#*====*:*@@@#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+];
 
 const ROWS = ART_LINES.length; // 68
 const COLS = ART_LINES[0].length; // 100
@@ -263,10 +334,7 @@ export function AsciiPhoenixCore() {
     const fieldProg = link(gl, VS, FS_FIELD);
     const blurProg = link(gl, VS, FS_BLUR);
     const compProg = link(gl, VS, FS_COMPOSITE);
-    if (!fieldProg || !blurProg || !compProg) {
-      if (maskTexture) gl.deleteTexture(maskTexture);
-      return;
-    }
+    if (!fieldProg || !blurProg || !compProg) return;
 
     // 3. Exact 8-Stop Oklab Color Ramp matching GradientASCII
     const COLORS = [
@@ -298,39 +366,34 @@ export function AsciiPhoenixCore() {
       return { fb, tex, w, h };
     };
 
-    const destroyFbo = (target: { fb: WebGLFramebuffer | null; tex: WebGLTexture | null } | null) => {
-      if (!target) return;
-      if (target.fb) gl.deleteFramebuffer(target.fb);
-      if (target.tex) gl.deleteTexture(target.tex);
-    };
-
     let fboField: ReturnType<typeof createFbo> | null = null;
     let fboHaloA: ReturnType<typeof createFbo> | null = null;
     let fboHaloB: ReturnType<typeof createFbo> | null = null;
 
     let rafId = 0;
-    let disposed = false;
-    let isVisible = false;
     const startTime = performance.now();
 
-    // Reduced motion preference detection (PERF-04)
-    const mediaQuery = typeof window !== 'undefined'
-      ? window.matchMedia('(prefers-reduced-motion: reduce)')
-      : null;
-    let prefersReducedMotion = mediaQuery ? mediaQuery.matches : false;
-
     const render = (now: number) => {
-      rafId = 0;
-      if (disposed) return;
-      if (!isVisible || document.hidden) return;
-      if (!fboField || !fboHaloA || !fboHaloB) {
-        wake();
-        return;
+      const elapsed = (now - startTime) * 0.001;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      const width = Math.max(1, Math.round(rect.width * dpr));
+      const height = Math.max(1, Math.round(rect.height * dpr));
+
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+        const downW = Math.max(1, Math.round(width * 0.5));
+        const downH = Math.max(1, Math.round(height * 0.5));
+        fboField = createFbo(width, height);
+        fboHaloA = createFbo(downW, downH);
+        fboHaloB = createFbo(downW, downH);
       }
 
-      const elapsed = (now - startTime) * 0.001;
-      const width = canvas.width;
-      const height = canvas.height;
+      if (!fboField || !fboHaloA || !fboHaloB) {
+        rafId = requestAnimationFrame(render);
+        return;
+      }
 
       // PASS 1: Render Phoenix field into fboField
       gl.bindFramebuffer(gl.FRAMEBUFFER, fboField.fb);
@@ -371,115 +434,26 @@ export function AsciiPhoenixCore() {
       gl.uniform1i(compProg.uniforms.uHalo, 1);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
 
-      // If prefers-reduced-motion is active, finish after single static frame (PERF-04)
-      if (prefersReducedMotion) {
-        return;
-      }
-
       rafId = requestAnimationFrame(render);
     };
 
-    function wake() {
-      if (!rafId && !disposed && isVisible && !document.hidden) {
-        rafId = requestAnimationFrame(render);
-      }
-    }
-
-    function sleep() {
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = 0;
-      }
-    }
-
-    const updateSize = (cssWidth: number, cssHeight: number) => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const width = Math.max(1, Math.round(cssWidth * dpr));
-      const height = Math.max(1, Math.round(cssHeight * dpr));
-
-      if (canvas.width === width && canvas.height === height && fboField) return;
-
-      canvas.width = width;
-      canvas.height = height;
-
-      // Free previous FBO & Texture allocations to prevent GPU VRAM leak (VIS-03)
-      destroyFbo(fboField);
-      destroyFbo(fboHaloA);
-      destroyFbo(fboHaloB);
-
-      const downW = Math.max(1, Math.round(width * 0.5));
-      const downH = Math.max(1, Math.round(height * 0.5));
-      fboField = createFbo(width, height);
-      fboHaloA = createFbo(downW, downH);
-      fboHaloB = createFbo(downW, downH);
-
-      wake();
-    };
-
-    // Event-driven size tracking via ResizeObserver (Q-01: no getBoundingClientRect in RAF)
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const { width, height } = entry.contentRect;
-        if (width > 0 && height > 0) {
-          updateSize(width, height);
-        }
-      }
-    });
-    resizeObserver.observe(canvas);
-
-    // Initial size check
-    if (canvas.clientWidth > 0 && canvas.clientHeight > 0) {
-      updateSize(canvas.clientWidth, canvas.clientHeight);
-    }
-
-    // Visibility management via IntersectionObserver (PERF-01)
-    const intersectionObserver = new IntersectionObserver((entries) => {
-      isVisible = entries.some((entry) => entry.isIntersecting);
-      if (isVisible && !document.hidden) {
-        wake();
-      } else {
-        sleep();
-      }
-    });
-    intersectionObserver.observe(canvas);
-
-    // Browser tab visibility change (PERF-01)
-    const onVisibilityChange = () => {
-      if (!document.hidden && isVisible) {
-        wake();
-      } else {
-        sleep();
-      }
-    };
-    document.addEventListener('visibilitychange', onVisibilityChange);
-
-    // Reduced motion change listener (PERF-04)
-    const onMotionPreferenceChange = (e: MediaQueryListEvent) => {
-      prefersReducedMotion = e.matches;
-      wake();
-    };
-    mediaQuery?.addEventListener?.('change', onMotionPreferenceChange);
+    rafId = requestAnimationFrame(render);
 
     return () => {
-      disposed = true;
-      sleep();
-      resizeObserver.disconnect();
-      intersectionObserver.disconnect();
-      document.removeEventListener('visibilitychange', onVisibilityChange);
-      mediaQuery?.removeEventListener?.('change', onMotionPreferenceChange);
-
+      cancelAnimationFrame(rafId);
       gl.deleteTexture(maskTexture);
-      destroyFbo(fboField);
-      destroyFbo(fboHaloA);
-      destroyFbo(fboHaloB);
-      fboField = null;
-      fboHaloA = null;
-      fboHaloB = null;
-
-      // Delete shader programs (Q-01)
-      gl.deleteProgram(fieldProg.program);
-      gl.deleteProgram(blurProg.program);
-      gl.deleteProgram(compProg.program);
+      if (fboField) {
+        gl.deleteFramebuffer(fboField.fb);
+        gl.deleteTexture(fboField.tex);
+      }
+      if (fboHaloA) {
+        gl.deleteFramebuffer(fboHaloA.fb);
+        gl.deleteTexture(fboHaloA.tex);
+      }
+      if (fboHaloB) {
+        gl.deleteFramebuffer(fboHaloB.fb);
+        gl.deleteTexture(fboHaloB.tex);
+      }
     };
   }, []);
 

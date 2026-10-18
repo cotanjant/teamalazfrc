@@ -86,22 +86,22 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (open) {
       document.body.classList.add('overflow-hidden');
       document.documentElement.style.overflow = 'hidden';
-      if (typeof window !== 'undefined' && window.__lenis) {
-        window.__lenis.stop();
+      if (typeof window !== 'undefined' && (window as any).__lenis) {
+        (window as any).__lenis.stop();
       }
     } else {
       document.body.classList.remove('overflow-hidden');
       document.documentElement.style.overflow = '';
-      if (typeof window !== 'undefined' && window.__lenis) {
-        window.__lenis.start();
+      if (typeof window !== 'undefined' && (window as any).__lenis) {
+        (window as any).__lenis.start();
       }
     }
 
     return () => {
       document.body.classList.remove('overflow-hidden');
       document.documentElement.style.overflow = '';
-      if (typeof window !== 'undefined' && window.__lenis) {
-        window.__lenis.start();
+      if (typeof window !== 'undefined' && (window as any).__lenis) {
+        (window as any).__lenis.start();
       }
     };
   }, [open]);
@@ -168,7 +168,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const panelStart = offscreen;
 
     if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
-    if (numberEls.length) gsap.set(numberEls, { '--sm-num-opacity': 0 } as Record<string, string | number>);
+    if (numberEls.length) gsap.set(numberEls, { ['--sm-num-opacity' as any]: 0 });
     if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
     if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
 
@@ -202,12 +202,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       if (numberEls.length) {
         tl.to(
           numberEls,
-          {
-            duration: 0.6,
-            ease: 'power2.out',
-            ...({ '--sm-num-opacity': 1 } as Record<string, string | number>),
-            stagger: { each: 0.08, from: 'start' },
-          },
+          { duration: 0.6, ease: 'power2.out', ['--sm-num-opacity' as any]: 1, stagger: { each: 0.08, from: 'start' } },
           itemsStart + 0.1
         );
       }
@@ -279,7 +274,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const numberEls = Array.from(
           panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item')
         ) as HTMLElement[];
-        if (numberEls.length) gsap.set(numberEls, { '--sm-num-opacity': 0 } as Record<string, string | number>);
+        if (numberEls.length) gsap.set(numberEls, { ['--sm-num-opacity' as any]: 0 });
 
         const socialTitle = panel.querySelector('.sm-socials-title') as HTMLElement | null;
         const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link')) as HTMLElement[];
@@ -399,7 +394,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       animateIcon(false);
       animateColor(false);
       animateText(false);
-      toggleBtnRef.current?.focus();
     }
   }, [playClose, animateIcon, animateColor, animateText, onMenuClose]);
 
@@ -424,86 +418,23 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     };
   }, [closeOnClickAway, open, closeMenu]);
 
-  // Auto-close menu when screen width reaches or exceeds 1024px (RUX-02)
+  // Escape key closes menu
   useEffect(() => {
     if (!open) return;
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        closeMenu();
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [open, closeMenu]);
-
-  // Keyboard focus trap & Escape handling for accessibility (A11Y-02)
-  useEffect(() => {
-    if (!open) return;
-
-    // Focus first focusable element inside menu drawer when opened
-    const focusTimer = setTimeout(() => {
-      if (panelRef.current) {
-        const focusableElements = panelRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusableElements.length > 0) {
-          focusableElements[0].focus();
-        }
-      }
-    }, 50);
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        e.preventDefault();
         closeMenu();
-        toggleBtnRef.current?.focus();
-        return;
-      }
-
-      if (e.key === 'Tab') {
-        const panel = panelRef.current;
-        if (!panel) return;
-
-        const focusableElements = Array.from(
-          panel.querySelectorAll<HTMLElement>(
-            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-          )
-        ).filter((el) => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0);
-
-        if (focusableElements.length === 0) {
-          e.preventDefault();
-          return;
-        }
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstElement || !panel.contains(document.activeElement)) {
-            e.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          if (document.activeElement === lastElement || !panel.contains(document.activeElement)) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      clearTimeout(focusTimer);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [open, closeMenu]);
 
   const drawerPortal = mounted
     ? createPortal(
         <div
           className="staggered-menu-portal-root"
-          style={accentColor ? ({ '--sm-accent': accentColor } as React.CSSProperties) : undefined}
+          style={accentColor ? ({ ['--sm-accent' as any]: accentColor } as React.CSSProperties) : undefined}
           data-position={position}
           data-open={open || undefined}
         >
@@ -831,7 +762,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             gap: 0 !important;
           }
           .staggered-menu-portal-root .sm-panel-item {
-            font-size: clamp(1.4rem, 6vw, 2.5rem) !important;
+            font-size: clamp(2rem, 8vh, 3.25rem) !important;
             line-height: 1.15 !important;
             padding-right: 1.8em !important;
             display: inline-block !important;

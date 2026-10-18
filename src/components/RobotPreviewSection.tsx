@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { siteCollection } from "@/data/collection";
@@ -95,13 +94,15 @@ export function RobotPreviewSection() {
           <div className="robot-reveal blur-reveal lg:col-span-5">
             <div className="border border-[#1A1A1A] bg-[#050505] p-3 sm:p-4 transition-colors duration-500 hover:border-[#FF7800]/40 group">
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0A0A0A]">
-                <Image
-                  src="/medias/crew-3.webp"
-                  alt={robot.title || "Team ALAZ Robot Engineering"}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                />
+                <picture>
+                  <source srcSet="/medias/crew-3.webp" type="image/webp" />
+                  <img
+                    src="/medias/crew-3.jpg"
+                    alt={robot.title || "Team ALAZ Robot Engineering"}
+                    loading="lazy"
+                    className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  />
+                </picture>
               </div>
             </div>
           </div>

@@ -100,15 +100,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} dark`}
     >
       <body className="bg-[#000000] text-[#E8E8E8] font-sans antialiased selection:bg-[#FF7800] selection:text-black overflow-x-hidden">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
       </body>

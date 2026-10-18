@@ -1,15 +1,5 @@
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output:
-    process.env.BUILD_STANDALONE || (process.platform !== "win32" && process.env.NODE_ENV === "production")
-      ? "standalone"
-      : undefined,
-  outputFileTracingRoot: __dirname,
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
@@ -20,10 +10,6 @@ const nextConfig = {
       {
         source: "/:path*",
         headers: [
-          {
-            key: "Strict-Transport-Security",
-            value: "max-age=63072000; includeSubDomains; preload",
-          },
           {
             key: "X-Frame-Options",
             value: "DENY",

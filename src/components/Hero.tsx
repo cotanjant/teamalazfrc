@@ -4,17 +4,9 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import dynamic from "next/dynamic";
+import { GradientASCII } from "@/components/GradientASCII";
+import { AsciiPhoenixCore } from "@/components/AsciiPhoenixCore";
 import { siteCollection } from "@/data/collection";
-
-const GradientASCII = dynamic(
-  () => import("@/components/GradientASCII").then((mod) => mod.GradientASCII),
-  { ssr: false }
-);
-const AsciiPhoenixCore = dynamic(
-  () => import("@/components/AsciiPhoenixCore").then((mod) => mod.AsciiPhoenixCore),
-  { ssr: false }
-);
 
 function deriveHeadlineLines(
   headlineFull?: string,
@@ -59,7 +51,7 @@ function splitText(line: string) {
   return words.map((word, wordIdx) => (
     <span
       key={`${line}-${word}-${wordIdx}`}
-      className="inline-block whitespace-nowrap break-words"
+      className="inline-block whitespace-nowrap"
     >
       {word.split("").map((char, charIdx) => (
         <span
@@ -247,7 +239,7 @@ export function Hero() {
       <AsciiPhoenixCore />
 
       {/* Four-Quadrant Diagonal Tension Poster Layout — Strictly 1 Screen (calc(100dvh - 4rem)) on PC & Mobile */}
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-12 h-full pt-5 sm:pt-7 lg:pt-8 pb-5 sm:pb-7 lg:pb-8 flex flex-col justify-between pointer-events-none">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-12 h-full pt-5 sm:pt-7 lg:pt-8 pb-5 sm:pb-7 lg:pb-8 flex flex-col justify-between pointer-events-none">
         {/* Top Row: Top-Left Monumental Anchor */}
         <div className="w-full shrink-0 pointer-events-auto">
           <div className="hero-fade blur-reveal mb-2 sm:mb-3 flex items-center gap-3">
@@ -263,7 +255,7 @@ export function Hero() {
           >
             <div
               ref={line1Ref}
-              className="max-w-[16ch] lg:max-w-[20ch] text-[clamp(1.75rem,8vw,3.65rem)] sm:text-[clamp(3.15rem,min(6.2vw,9.5dvh),6.85rem)] font-bold uppercase tracking-[-0.02em] leading-[1.02] text-white will-change-transform"
+              className="max-w-[16ch] lg:max-w-[20ch] text-[clamp(2.35rem,9vw,3.65rem)] sm:text-[clamp(3.15rem,min(6.2vw,9.5dvh),6.85rem)] font-bold uppercase tracking-[-0.02em] leading-[1.02] text-white will-change-transform"
             >
               {splitText(headlineLine1)}
             </div>

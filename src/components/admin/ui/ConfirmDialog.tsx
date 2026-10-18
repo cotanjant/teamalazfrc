@@ -86,7 +86,7 @@ export function ConfirmDialog({
             <DialogPrimitive.Close asChild>
               <button
                 type="button"
-                className="min-h-[44px] min-w-[44px] -mr-2 -mt-2 flex items-center justify-center rounded-none opacity-70 transition-opacity hover:opacity-100 text-zinc-400 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF7800]"
+                className="rounded-none opacity-70 transition-opacity hover:opacity-100 text-zinc-400 hover:text-white focus:outline-none"
                 aria-label="Kapat"
               >
                 <X className="h-4 w-4" />
@@ -95,14 +95,14 @@ export function ConfirmDialog({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-2.5 sm:gap-3 pt-3 border-t border-[#1A1A1A]">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#1A1A1A]">
             <Button
               type="button"
               variant="outline"
               size="sm"
               disabled={loading}
               onClick={() => onOpenChange(false)}
-              className="w-full sm:w-auto border-[#262626] bg-[#000000] text-xs text-zinc-300 hover:text-white hover:bg-[#141414] h-10 sm:h-9 px-4 rounded-none"
+              className="border-[#262626] bg-[#000000] text-xs text-zinc-300 hover:text-white hover:bg-[#141414] h-9 px-4 rounded-none"
             >
               {cancelLabel}
             </Button>
@@ -112,7 +112,7 @@ export function ConfirmDialog({
               size="sm"
               disabled={loading}
               onClick={handleConfirm}
-              className={`w-full sm:w-auto text-xs font-semibold h-10 sm:h-9 px-5 transition-all rounded-none ${
+              className={`text-xs font-semibold h-9 px-5 transition-all rounded-none ${
                 variant === "danger"
                   ? "bg-rose-600 hover:bg-rose-700 text-white shadow-[0_0_15px_rgba(225,29,72,0.25)]"
                   : variant === "warning"

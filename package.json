@@ -7,9 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.3.1",
@@ -37,7 +35,6 @@
     "eslint-config-next": "^15.5.28",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.9",
-    "typescript": "^5.8.2",
-    "vitest": "^3.0.0"
+    "typescript": "^5.8.2"
   }
 }

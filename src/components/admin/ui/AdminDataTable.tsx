@@ -65,7 +65,7 @@ export interface TableFilter<T> {
   allLabel?: string;
 }
 
-export interface AdminDataTableProps<T extends Record<string, unknown>> {
+export interface AdminDataTableProps<T extends Record<string, any>> {
   data: T[];
   columns: Column<T>[];
   title?: string;
@@ -91,7 +91,7 @@ export interface AdminDataTableProps<T extends Record<string, unknown>> {
   renderCustomRowActions?: (item: T, originalIndex: number) => React.ReactNode;
 }
 
-export function AdminDataTable<T extends Record<string, unknown>>({
+export function AdminDataTable<T extends Record<string, any>>({
   data,
   columns,
   title,
@@ -408,19 +408,10 @@ export function AdminDataTable<T extends Record<string, unknown>>({
               </tr>
             ) : (
               paginatedData.map((item, rowIdx) => {
-                const originalIdx =
-                  typeof (item as { __originalIndex?: number }).__originalIndex === "number"
-                    ? (item as { __originalIndex: number }).__originalIndex
-                    : rowIdx;
-                const itemId =
-                  "id" in item && (typeof item.id === "string" || typeof item.id === "number")
-                    ? String(item.id)
-                    : undefined;
-                const itemCode =
-                  "code" in item && typeof item.code === "string" ? item.code : undefined;
+                const originalIdx = (item as any).__originalIndex ?? rowIdx;
                 const rowKey = keyExtractor
                   ? keyExtractor(item, originalIdx)
-                  : itemId || itemCode || originalIdx;
+                  : item.id || (item as any).code || originalIdx;
 
                 return (
                   <tr
@@ -429,27 +420,25 @@ export function AdminDataTable<T extends Record<string, unknown>>({
                   >
                     {/* Reorder Buttons */}
                     {onReorder && (
-                      <td className="py-2.5 px-2 text-center w-12">
-                        <div className="flex flex-col items-center gap-1 sm:gap-0.5 opacity-60 group-hover:opacity-100 transition-opacity">
+                      <td className="py-2.5 px-3 text-center w-12">
+                        <div className="flex flex-col items-center gap-0.5 opacity-60 group-hover:opacity-100 transition-opacity">
                           <button
                             type="button"
                             disabled={originalIdx === 0}
                             onClick={() => onReorder(originalIdx, originalIdx - 1)}
-                            className="flex items-center justify-center min-h-[44px] min-w-[36px] sm:min-h-[28px] sm:min-w-[28px] p-0.5 text-zinc-500 hover:text-orange-400 disabled:opacity-20 disabled:hover:text-zinc-500 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF7800] rounded-none transition-colors"
+                            className="p-0.5 text-zinc-500 hover:text-orange-400 disabled:opacity-20 disabled:hover:text-zinc-500 focus:outline-none"
                             title="Yukarı taşı"
-                            aria-label="Yukarı taşı"
                           >
-                            <ChevronUp className="w-3.5 h-3.5 sm:w-3 sm:h-3" />
+                            <ChevronUp className="w-3 h-3" />
                           </button>
                           <button
                             type="button"
                             disabled={originalIdx === data.length - 1}
                             onClick={() => onReorder(originalIdx, originalIdx + 1)}
-                            className="flex items-center justify-center min-h-[44px] min-w-[36px] sm:min-h-[28px] sm:min-w-[28px] p-0.5 text-zinc-500 hover:text-orange-400 disabled:opacity-20 disabled:hover:text-zinc-500 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF7800] rounded-none transition-colors"
+                            className="p-0.5 text-zinc-500 hover:text-orange-400 disabled:opacity-20 disabled:hover:text-zinc-500 focus:outline-none"
                             title="Aşağı taşı"
-                            aria-label="Aşağı taşı"
                           >
-                            <ChevronDown className="w-3.5 h-3.5 sm:w-3 sm:h-3" />
+                            <ChevronDown className="w-3 h-3" />
                           </button>
                         </div>
                       </td>

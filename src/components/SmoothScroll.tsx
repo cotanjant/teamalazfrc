@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import type Lenis from "lenis";
-import { gsap, ScrollTrigger } from "@/lib/animations/gsapInit";
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 declare global {
   interface Window {
@@ -11,8 +12,10 @@ declare global {
   }
 }
 
+gsap.registerPlugin(ScrollTrigger);
+
 interface SmoothScrollProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export function SmoothScroll({ children }: SmoothScrollProps) {
@@ -27,97 +30,86 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
       return;
     }
 
-    let isDestroyed = false;
-    let updateTicker: ((time: number) => void) | null = null;
-    let handleAnchorClick: ((event: MouseEvent) => void) | null = null;
-    let handleMotionChange: ((event: MediaQueryListEvent) => void) | null = null;
-
-    import("lenis").then(({ default: LenisClass }) => {
-      if (isDestroyed) return;
-
-      const lenis = new LenisClass({
-        lerp: 0.08,
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1,
-        syncTouch: false,
-        prevent: (node) => {
-          return (
-            node.tagName === "INPUT" ||
-            node.tagName === "TEXTAREA" ||
-            node.tagName === "SELECT" ||
-            node.hasAttribute("data-lenis-prevent")
-          );
-        },
-        virtualScroll: (data) => {
-          if (
-            data.event.type.startsWith("touch") &&
-            (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768)
-          ) {
-            return false;
-          }
-          return true;
-        },
-      });
-
-      lenisRef.current = lenis;
-      if (typeof window !== "undefined") {
-        window.__lenis = lenis;
-      }
-
-      lenis.on("scroll", ScrollTrigger.update);
-
-      updateTicker = (time: number) => {
-        lenis.raf(time * 1000);
-      };
-
-      gsap.ticker.add(updateTicker);
-      gsap.ticker.lagSmoothing(0);
-
-      handleAnchorClick = (event: MouseEvent) => {
-        const target = event.target as HTMLElement | null;
-        const anchor = target?.closest("a[href*='#']") as HTMLAnchorElement | null;
-        if (!anchor) return;
-
-        const href = anchor.getAttribute("href");
-        if (!href) return;
-
-        const url = new URL(href, window.location.origin);
-        if (url.pathname !== window.location.pathname) return;
-
-        const hash = url.hash;
-        if (!hash || hash === "#") return;
-
-        const targetElement = document.querySelector<HTMLElement>(hash);
-        if (targetElement) {
-          event.preventDefault();
-          lenis.scrollTo(targetElement, { offset: -64 });
-          window.history.pushState(null, "", hash);
+    const lenis = new Lenis({
+      lerp: 0.08,
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1,
+      syncTouch: false,
+      prevent: (node) => {
+        return (
+          node.tagName === "INPUT" ||
+          node.tagName === "TEXTAREA" ||
+          node.tagName === "SELECT" ||
+          node.hasAttribute("data-lenis-prevent")
+        );
+      },
+      virtualScroll: (data) => {
+        // Mobilde / dar ekranda veya dokunmatik cihazlarda Lenis'in dokunmatik olayları ele geçirmemesini sağla
+        if (
+          data.event.type.startsWith("touch") &&
+          (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768)
+        ) {
+          return false;
         }
-      };
-
-      document.addEventListener("click", handleAnchorClick);
-
-      handleMotionChange = (event: MediaQueryListEvent) => {
-        if (event.matches && lenisRef.current) {
-          if (updateTicker) gsap.ticker.remove(updateTicker);
-          lenisRef.current.destroy();
-          lenisRef.current = null;
-        }
-      };
-
-      mediaQuery.addEventListener("change", handleMotionChange);
+        return true;
+      },
     });
 
-    return () => {
-      isDestroyed = true;
-      if (handleAnchorClick) document.removeEventListener("click", handleAnchorClick);
-      if (handleMotionChange) mediaQuery.removeEventListener("change", handleMotionChange);
-      if (updateTicker) gsap.ticker.remove(updateTicker);
-      if (lenisRef.current) {
+    lenisRef.current = lenis;
+    if (typeof window !== "undefined") {
+      window.__lenis = lenis;
+    }
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const updateTicker = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateTicker);
+    gsap.ticker.lagSmoothing(0);
+
+    const handleAnchorClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      const anchor = target?.closest("a[href*='#']") as HTMLAnchorElement | null;
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+
+      const url = new URL(href, window.location.origin);
+      if (url.pathname !== window.location.pathname) return;
+
+      const hash = url.hash;
+      if (!hash || hash === "#") return;
+
+      const targetElement = document.querySelector<HTMLElement>(hash);
+      if (targetElement) {
+        event.preventDefault();
+        lenis.scrollTo(targetElement, { offset: -64 });
+        window.history.pushState(null, "", hash);
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+
+    const handleMotionChange = (event: MediaQueryListEvent) => {
+      if (event.matches && lenisRef.current) {
+        gsap.ticker.remove(updateTicker);
         lenisRef.current.destroy();
         lenisRef.current = null;
       }
+    };
+
+    mediaQuery.addEventListener("change", handleMotionChange);
+
+    return () => {
+      document.removeEventListener("click", handleAnchorClick);
+      mediaQuery.removeEventListener("change", handleMotionChange);
+      gsap.ticker.remove(updateTicker);
+      lenis.destroy();
+      lenisRef.current = null;
       if (typeof window !== "undefined") {
         delete window.__lenis;
       }
@@ -146,7 +138,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     ScrollTrigger.refresh();
   }, [pathname]);
 
-  return children ? <>{children}</> : null;
+  return <>{children}</>;
 }
 
 export default SmoothScroll;
