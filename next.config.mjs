@@ -3,16 +3,13 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const isVercel = Boolean(process.env.VERCEL);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: isVercel
-    ? undefined
-    : process.env.BUILD_STANDALONE
-    ? "standalone"
-    : undefined,
-  outputFileTracingRoot: isVercel ? undefined : __dirname,
+  output:
+    process.env.BUILD_STANDALONE || (process.platform !== "win32" && process.env.NODE_ENV === "production")
+      ? "standalone"
+      : undefined,
+  outputFileTracingRoot: __dirname,
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
