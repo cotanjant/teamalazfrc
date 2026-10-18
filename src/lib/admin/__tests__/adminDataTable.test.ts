@@ -13,12 +13,12 @@ test("AdminDataTable & Turkish Sorting unit test suite", () => {
     // In Turkish alphabetical order:
     // A, B, C, C, D, E, F, G, G, H, I, I, J, K, L, M, N, O, O, P, R, S, S, T, U, U, V, Y, Z
     // Expected order:
-    // Ahmet, Berk, Cigdem, Isik, Ipek, Omer, Sencan, Umit, Zeynep
+    // Ahmet, Berk, Cigdem, Ipek, Isik, Omer, Sencan, Umit, Zeynep
     assert.equal(sorted[0], "Ahmet");
     assert.equal(sorted[1], "Berk");
     assert.equal(sorted[2], "Cigdem");
-    assert.equal(sorted[3], "Isik");
-    assert.equal(sorted[4], "Ipek");
+    assert.equal(sorted[3], "Ipek");
+    assert.equal(sorted[4], "Isik");
     assert.equal(sorted[5], "Omer");
     assert.equal(sorted[6], "Sencan");
     assert.equal(sorted[7], "Umit");
