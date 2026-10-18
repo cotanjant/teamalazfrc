@@ -55,7 +55,7 @@ void main() {
   // Flip Y coordinate because WebGL texture V coordinates are inverted relative to DOM canvas
   vec2 baseUv = vec2(vUv.x, 1.0 - vUv.y);
 
-  // Subtle liquid-heat wave displacement across space ("sanki dalgalanıyor gibi")
+  // Subtle liquid-heat wave displacement across space ("sanki dalgalaniyor gibi")
   vec2 waveDisp = vec2(
     sin(baseUv.y * 18.0 - uTime * 1.8 + baseUv.x * 8.0) * 0.003,
     cos(baseUv.x * 14.0 + uTime * 1.5 + baseUv.y * 6.0) * 0.002

@@ -103,9 +103,9 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`ALAZ Başvuru - ${name || "Aday"} (${department || "Genel"})`);
+    const subject = encodeURIComponent(`ALAZ Basvuru - ${name || "Aday"} (${department || "Genel"})`);
     const body = encodeURIComponent(
-      `İsim: ${name}\nE-posta: ${email}\nBaşvurulan Departman: ${department}\n\nMesaj / Açıklama:\n${message}`
+      `Isim: ${name}\nE-posta: ${email}\nBasvurulan Departman: ${department}\n\nMesaj / Aciklama:\n${message}`
     );
     window.location.href = `mailto:${contact.email || "alazfrc@gmail.com"}?subject=${subject}&body=${body}`;
   };

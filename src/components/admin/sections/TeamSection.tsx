@@ -66,7 +66,7 @@ export function TeamSection() {
     },
     {
       key: "name",
-      title: "Departman Adı",
+      title: "Departman Adi",
       sortable: true,
       render: (item, idx) =>
         editingIndex === idx ? (
@@ -96,7 +96,7 @@ export function TeamSection() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-[#0A0A0A] border-[#1A1A1A] text-zinc-200 rounded-none">
-              <SelectItem value="Engineering">Mühendislik</SelectItem>
+              <SelectItem value="Engineering">Muhendislik</SelectItem>
               <SelectItem value="Operations">Operasyon</SelectItem>
             </SelectContent>
           </Select>
@@ -109,13 +109,13 @@ export function TeamSection() {
                 : "border-[#FFD21C]/40 text-[#FFD21C] bg-[#FFD21C]/10 text-[10px] font-mono rounded-none uppercase"
             }
           >
-            {item.category === "Engineering" ? "Mühendislik" : "Operasyon"}
+            {item.category === "Engineering" ? "Muhendislik" : "Operasyon"}
           </Badge>
         ),
     },
     {
       key: "description",
-      title: "Görev Tanımı / Açıklama",
+      title: "Gorev Tanimi / Aciklama",
       render: (item, idx) =>
         editingIndex === idx ? (
           <Input
@@ -131,7 +131,7 @@ export function TeamSection() {
 
   return (
     <div className="space-y-6">
-      {/* 1. Takım Felsefesi ve Başlığı */}
+      {/* 1. Takim Felsefesi ve Basligi */}
       <Card className="bg-[#000000] border-[#1A1A1A] rounded-none shadow-xl">
         <CardHeader className="pb-4 border-b border-[#1A1A1A]">
           <div className="flex items-center gap-2.5">
@@ -149,7 +149,7 @@ export function TeamSection() {
         <CardContent className="space-y-4 pt-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <Label htmlFor="field-team-title" className="text-xs text-zinc-400">Bölüm Başlığı</Label>
+              <Label htmlFor="field-team-title" className="text-xs text-zinc-400">Bolum Basligi</Label>
               <Input
                 id="field-team-title"
                 value={data.team.title}
@@ -189,15 +189,15 @@ export function TeamSection() {
           title={t("team.departmentsTitle")}
           subtitle={t("team.departmentsDescription")}
           icon={<Building2 className="w-4 h-4" />}
-          searchPlaceholder="Departmanlarda ara (kod, isim, görev tanımı)..."
+          searchPlaceholder="Departmanlarda ara (kod, isim, gorev tanimi)..."
           searchKeys={["code", "name", "description", "category"]}
           filters={[
             {
               key: "category",
               label: "Kategori",
-              allLabel: "Tüm Departmanlar",
+              allLabel: "Tum Departmanlar",
               options: [
-                { label: "Mühendislik (Engineering)", value: "Engineering" },
+                { label: "Muhendislik (Engineering)", value: "Engineering" },
                 { label: "Operasyon (Operations)", value: "Operations" },
               ],
             },
@@ -207,7 +207,7 @@ export function TeamSection() {
             addDepartment({
               name: "Yeni Departman",
               category: "Engineering",
-              description: "Departman görev ve sorumlulukları...",
+              description: "Departman gorev ve sorumluluklari...",
               code: `DEPT-${String(data.departments.length + 1).padStart(2, "0")}`,
             })
           }
@@ -219,9 +219,9 @@ export function TeamSection() {
             }
           }}
           onDelete={(_, originalIndex) => removeDepartment(originalIndex)}
-          deleteConfirmTitle="Departmanı Sil"
+          deleteConfirmTitle="Departmani Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.name}' (#${item.code}) departmanını silmek istediğinizden emin misiniz?`
+            `'${item.name}' (#${item.code}) departmanini silmek istediginizden emin misiniz?`
           }
           onReorder={reorderDepartment}
           renderCustomRowActions={(_, originalIndex) =>

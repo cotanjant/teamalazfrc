@@ -55,13 +55,13 @@ async function run() {
     const newNav: Partial<NavItem> = {
       id: "nav-sponsors",
       code: "08",
-      label: "DESTEKÇİLER",
+      label: "DESTEKCILER",
       href: "#sponsors",
       isExternal: false,
     };
     const addedNav = pureMutators.addNavigationItem(initial, newNav);
     assert.equal(addedNav.navigation.length, initial.navigation.length + 1);
-    assert.equal(addedNav.navigation[addedNav.navigation.length - 1].label, "DESTEKÇİLER");
+    assert.equal(addedNav.navigation[addedNav.navigation.length - 1].label, "DESTEKCILER");
 
     const reorderedNav = pureMutators.reorderNavigationItem(addedNav, 0, 1);
     assert.equal(reorderedNav.navigation[0].id, addedNav.navigation[1].id);
@@ -174,8 +174,8 @@ async function run() {
   // 8. Outreach, Partners, CrewGallery, Contact & Socials
   {
     // Outreach
-    const updatedOutreach = pureMutators.updateOutreach(initial, "tagline", "Inspiring İzmir Communities");
-    assert.equal(updatedOutreach.outreach.tagline, "Inspiring İzmir Communities");
+    const updatedOutreach = pureMutators.updateOutreach(initial, "tagline", "Inspiring Izmir Communities");
+    assert.equal(updatedOutreach.outreach.tagline, "Inspiring Izmir Communities");
 
     // Partners
     const newPartner: Partial<PartnerSlotItem> = {

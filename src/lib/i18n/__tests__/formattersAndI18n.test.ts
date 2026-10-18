@@ -7,13 +7,13 @@ console.log("Running comprehensive i18n verification test suite...");
 // 1. Translation Functionality & Lookups
 {
   // Key lookups
-  assert.equal(getAdminTranslation("common.save"), "Değişiklikleri Kaydet");
-  assert.equal(getAdminTranslation("homeStats.heroTitle"), "Ana Sayfa Başlık Metinleri");
-  assert.equal(getAdminTranslation("team.categories.engineering"), "Mühendislik");
-  assert.equal(getAdminTranslation("errors.missingToken"), "Oturum anahtarı bulunamadı. Lütfen tekrar giriş yapınız.");
+  assert.equal(getAdminTranslation("common.save"), "Degisiklikleri Kaydet");
+  assert.equal(getAdminTranslation("homeStats.heroTitle"), "Ana Sayfa Baslik Metinleri");
+  assert.equal(getAdminTranslation("team.categories.engineering"), "Muhendislik");
+  assert.equal(getAdminTranslation("errors.missingToken"), "Oturum anahtari bulunamadi. Lutfen tekrar giris yapiniz.");
 
   // Fallback
-  assert.equal(getAdminTranslation("nonexistent.key" as any, undefined, "Varsayılan"), "Varsayılan");
+  assert.equal(getAdminTranslation("nonexistent.key" as any, undefined, "Varsayilan"), "Varsayilan");
   assert.equal(getAdminTranslation("nonexistent.key" as any), "nonexistent.key");
 
   // Interpolation helper

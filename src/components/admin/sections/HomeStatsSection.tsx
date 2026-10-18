@@ -49,7 +49,7 @@ export function HomeStatsSection() {
   const navColumns: Column<NavItem>[] = [
     {
       key: "code",
-      title: "Sıra No",
+      title: "Sira No",
       width: "90px",
       sortable: true,
       render: (item, idx) =>
@@ -67,7 +67,7 @@ export function HomeStatsSection() {
     },
     {
       key: "label",
-      title: "Menü Başlığı",
+      title: "Menu Basligi",
       sortable: true,
       render: (item, idx) =>
         editingNavIndex === idx ? (
@@ -82,7 +82,7 @@ export function HomeStatsSection() {
     },
     {
       key: "href",
-      title: "Hedef Bağlantı (URL / #çapa)",
+      title: "Hedef Baglanti (URL / #capa)",
       sortable: true,
       render: (item, idx) =>
         editingNavIndex === idx ? (
@@ -138,7 +138,7 @@ export function HomeStatsSection() {
     },
     {
       key: "label",
-      title: "Metrik Başlığı",
+      title: "Metrik Basligi",
       sortable: true,
       render: (item, idx) =>
         editingStatIndex === idx ? (
@@ -153,7 +153,7 @@ export function HomeStatsSection() {
     },
     {
       key: "value",
-      title: "Değer",
+      title: "Deger",
       width: "110px",
       sortable: true,
       render: (item, idx) =>
@@ -162,7 +162,7 @@ export function HomeStatsSection() {
             value={String(editingStat.value ?? item.value ?? "")}
             onChange={(e) => setEditingStat((prev) => ({ ...prev, value: e.target.value }))}
             className="h-7 text-xs bg-[#000000] border-[#262626] text-white font-mono"
-            placeholder="Değer"
+            placeholder="Deger"
           />
         ) : (
           <span className="font-mono font-bold text-[#FF7800]">
@@ -188,7 +188,7 @@ export function HomeStatsSection() {
     },
     {
       key: "description",
-      title: "Açıklama",
+      title: "Aciklama",
       render: (item, idx) =>
         editingStatIndex === idx ? (
           <Input
@@ -204,7 +204,7 @@ export function HomeStatsSection() {
 
   return (
     <div className="space-y-8">
-      {/* 1. Hero Karşılama Metinleri */}
+      {/* 1. Hero Karsilama Metinleri */}
       <Card className="bg-[#000000] border-[#1A1A1A] rounded-none shadow-xl">
         <CardHeader className="pb-4 border-b border-[#1A1A1A]">
           <div className="flex items-center gap-2.5">
@@ -264,13 +264,13 @@ export function HomeStatsSection() {
                     href: data.hero.primaryCta?.href || "/#robot",
                   })
                 }
-                placeholder="Örn: Explore the Machine"
+                placeholder="Orn: Explore the Machine"
                 className="bg-[#121212] border-[#262626] text-white font-mono text-sm h-10 focus-visible:ring-[#FF7800]"
               />
             </div>
             <div className="space-y-2">
               <Label className="text-xs text-[#A3A3A3] uppercase tracking-wider font-mono">
-                İkincil Buton Metni
+                Ikincil Buton Metni
               </Label>
               <Input
                 value={data.hero.secondaryCta?.label || ""}
@@ -280,7 +280,7 @@ export function HomeStatsSection() {
                     href: data.hero.secondaryCta?.href || "/#contact",
                   })
                 }
-                placeholder="Örn: Join the Crew"
+                placeholder="Orn: Join the Crew"
                 className="bg-[#121212] border-[#262626] text-white font-mono text-sm h-10 focus-visible:ring-[#FF7800]"
               />
             </div>
@@ -288,20 +288,20 @@ export function HomeStatsSection() {
         </CardContent>
       </Card>
 
-      {/* 2. Site Menü ve Gezinti Bağlantıları (Navbar & Footer'a birebir bağlı) */}
+      {/* 2. Site Menu ve Gezinti Baglantilari (Navbar & Footer'a birebir bagli) */}
       <div>
         <AdminDataTable
           data={data.navigation}
           columns={navColumns}
-          title="Site Menü & Gezinti Bağlantıları"
-          subtitle="Navbar ve Footer menüsünde canlı görünen bağlantıları düzenleyin, sıralayın veya yeni sayfa ekleyin."
+          title="Site Menu & Gezinti Baglantilari"
+          subtitle="Navbar ve Footer menusunde canli gorunen baglantilari duzenleyin, siralayin veya yeni sayfa ekleyin."
           icon={<Menu className="w-4 h-4" />}
-          searchPlaceholder="Menü bağlantılarında ara (başlık, url)..."
+          searchPlaceholder="Menu baglantilarinda ara (baslik, url)..."
           searchKeys={["code", "label", "href"]}
-          addLabel="+ Yeni Menü Bağlantısı Ekle"
+          addLabel="+ Yeni Menu Baglantisi Ekle"
           onAdd={() =>
             addNavigationItem({
-              label: "Yeni Menü",
+              label: "Yeni Menu",
               href: "#",
               code: String(data.navigation.length + 1).padStart(2, "0"),
             })
@@ -314,9 +314,9 @@ export function HomeStatsSection() {
             }
           }}
           onDelete={(_, originalIndex) => removeNavigationItem(originalIndex)}
-          deleteConfirmTitle="Menü Bağlantısını Sil"
+          deleteConfirmTitle="Menu Baglantisini Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.label}' (${item.href}) menü bağlantısını kaldırmak istediğinizden emin misiniz?`
+            `'${item.label}' (${item.href}) menu baglantisini kaldirmak istediginizden emin misiniz?`
           }
           onReorder={reorderNavigationItem}
           renderCustomRowActions={(_, originalIndex) =>
@@ -335,7 +335,7 @@ export function HomeStatsSection() {
         />
       </div>
 
-      {/* 3. İstatistikler Tablosu (DataTable) */}
+      {/* 3. Istatistikler Tablosu (DataTable) */}
       <div>
         <AdminDataTable
           data={data.stats}
@@ -343,15 +343,15 @@ export function HomeStatsSection() {
           title={t("homeStats.statsTitle")}
           subtitle={t("homeStats.statsDescription")}
           icon={<BarChart3 className="w-4 h-4" />}
-          searchPlaceholder="İstatistiklerde ara (kod, başlık, açıklama)..."
+          searchPlaceholder="Istatistiklerde ara (kod, baslik, aciklama)..."
           searchKeys={["code", "label", "description", "value"]}
-          addLabel="+ Yeni İstatistik Ekle"
+          addLabel="+ Yeni Istatistik Ekle"
           onAdd={() =>
             addStat({
               label: "Yeni Metrik",
               value: 0,
               suffix: "+",
-              description: "Metrik açıklaması",
+              description: "Metrik aciklamasi",
               code: `STAT-${String(data.stats.length + 1).padStart(2, "0")}`,
             })
           }
@@ -363,9 +363,9 @@ export function HomeStatsSection() {
             }
           }}
           onDelete={(_, originalIndex) => removeStat(originalIndex)}
-          deleteConfirmTitle="İstatistiği Sil"
+          deleteConfirmTitle="Istatistigi Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.label}' (${item.code}) metriğini tablodan silmek istediğinizden emin misiniz?`
+            `'${item.label}' (${item.code}) metrigini tablodan silmek istediginizden emin misiniz?`
           }
           onReorder={reorderStat}
           renderCustomRowActions={(_, originalIndex) =>

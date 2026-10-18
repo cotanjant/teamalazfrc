@@ -7,8 +7,8 @@ import { AdminTour } from "@/components/admin/tour";
 import { AdminStoreProvider } from "@/lib/admin/useAdminStore";
 
 export const metadata: Metadata = {
-  title: "İçerik Yönetimi | Team ALAZ",
-  description: "Team ALAZ İçerik Yönetim Merkezi",
+  title: "Icerik Yonetimi | Team ALAZ",
+  description: "Team ALAZ Icerik Yonetim Merkezi",
   robots: {
     index: false,
     follow: false,

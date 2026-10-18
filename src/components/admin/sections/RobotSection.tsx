@@ -16,7 +16,7 @@ export function RobotSection() {
 
   return (
     <div className="space-y-6">
-      {/* Robot Genel Bakış */}
+      {/* Robot Genel Bakis */}
       <Card className="bg-[#000000] border-[#1A1A1A] rounded-none shadow-xl">
         <CardHeader className="pb-4 border-b border-[#1A1A1A]">
           <div className="flex items-center gap-2.5">
@@ -36,7 +36,7 @@ export function RobotSection() {
         <CardContent className="space-y-4 pt-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <Label htmlFor="field-robot-title" className="text-xs text-zinc-400">Bölüm Üst Başlığı (Kategori)</Label>
+              <Label htmlFor="field-robot-title" className="text-xs text-zinc-400">Bolum Ust Basligi (Kategori)</Label>
               <Input
                 id="field-robot-title"
                 value={data.robot.title || "Robot"}
