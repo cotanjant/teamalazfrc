@@ -121,7 +121,7 @@ function SidebarContent({
         {showMobileClose && onCloseMobile && (
           <button
             onClick={onCloseMobile}
-            className="p-1.5 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#1A1A1A] transition-colors ml-auto"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center p-1.5 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#1A1A1A] transition-colors ml-auto"
             aria-label="Menüyü Kapat"
           >
             <X className="w-5 h-5" />

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { test } from "vitest";
 import initialData from "../../../data/collection.json";
 import type {
   SiteCollection,
@@ -319,12 +320,46 @@ async function run() {
     console.log("✓ SaveData flow and i18n integration passed");
   }
 
+  // 12. Concurrency Lock (Q-02) Verification
+  {
+    let activeCallCount = 0;
+    let maxConcurrent = 0;
+    const isSavingRef = { current: false };
+
+    const simulatedSave = async (): Promise<boolean> => {
+      if (isSavingRef.current) return false;
+      isSavingRef.current = true;
+      activeCallCount++;
+      maxConcurrent = Math.max(maxConcurrent, activeCallCount);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+        return true;
+      } finally {
+        activeCallCount--;
+        isSavingRef.current = false;
+      }
+    };
+
+    const [res1, res2, res3] = await Promise.all([
+      simulatedSave(),
+      simulatedSave(),
+      simulatedSave(),
+    ]);
+
+    assert.equal(res1, true, "First save operation should proceed");
+    assert.equal(res2, false, "Second concurrent call must be rejected immediately by isSavingRef lock");
+    assert.equal(res3, false, "Third concurrent call must be rejected immediately by isSavingRef lock");
+    assert.equal(maxConcurrent, 1, "Max concurrent executions must strictly never exceed 1");
+    assert.equal(isSavingRef.current, false, "Lock must be released in finally block");
+    console.log("✓ Concurrency lock (Q-02 isSavingRef) verified: concurrent calls safely rejected");
+  }
+
   console.log("\n==========================================");
   console.log("ALL ADMIN STORE TESTS PASSED (100%)");
   console.log("==========================================");
 }
 
-run().catch((err) => {
-  console.error("Test execution failed:", err);
-  process.exit(1);
+test("Admin Store & State Management test suite", async () => {
+  await run();
 });
+

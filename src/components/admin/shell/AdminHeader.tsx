@@ -25,7 +25,7 @@ export function AdminHeader() {
       <div className="flex items-center gap-3 min-w-0">
         <button
           onClick={() => setIsMobileSidebarOpen(true)}
-          className="p-2 -ml-2 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#141414] md:hidden transition-colors"
+          className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 -ml-2 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#141414] md:hidden transition-colors"
           aria-label="Menüyü Aç"
         >
           <Menu className="w-5 h-5" />
@@ -51,25 +51,27 @@ export function AdminHeader() {
       </div>
 
       {/* Right Side: Guide Button + Logout */}
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-3">
         {/* Guide Button */}
         <button
           id="admin-tour-restart-button"
           onClick={() => startAdminTour()}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-none text-xs font-mono font-medium text-[#CCCCCC] bg-[#000000] hover:bg-[#141414] hover:text-white border border-[#1A1A1A] transition-colors uppercase tracking-wider"
+          className="min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-none text-xs font-mono font-medium text-[#CCCCCC] bg-[#000000] hover:bg-[#141414] hover:text-white border border-[#1A1A1A] transition-colors uppercase tracking-wider"
           title="Kullanım rehberini ve interaktif turu başlat"
+          aria-label="Rehberi Başlat"
         >
-          <Compass className="w-3.5 h-3.5 text-[#FF7800]" />
+          <Compass className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-[#FF7800]" />
           <span className="hidden sm:inline">Rehberi Başlat</span>
         </button>
 
         {/* Logout Button */}
         <button
           onClick={logout}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-none text-xs font-mono font-medium text-rose-400 hover:text-white hover:bg-rose-950/40 border border-rose-900/40 transition-colors uppercase tracking-wider"
+          className="min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-none text-xs font-mono font-medium text-rose-400 hover:text-white hover:bg-rose-950/40 border border-rose-900/40 transition-colors uppercase tracking-wider"
           title="Oturumu güvenle sonlandır"
+          aria-label="Çıkış Yap"
         >
-          <LogOut className="w-3.5 h-3.5" />
+          <LogOut className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
           <span className="hidden sm:inline">Çıkış Yap</span>
         </button>
       </div>

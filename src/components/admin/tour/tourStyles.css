@@ -7,7 +7,8 @@
   border-radius: 0px !important;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 0 1px #222222, 0 0 24px rgba(255, 120, 0, 0.12) !important;
   padding: 18px 20px !important;
-  min-width: 290px !important;
+  min-width: 0 !important;
+  width: calc(100vw - 32px) !important;
   max-width: 380px !important;
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif) !important;
   z-index: 1000000000 !important;

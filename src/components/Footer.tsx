@@ -37,7 +37,7 @@ export function Footer() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Floating Hero Card (Top of Footer) */}
         <div className="relative z-10 -mb-20">
-          <div className="relative overflow-hidden h-80 sm:h-96 border border-[#1A1A1A] border-t-2 border-t-[#FF7800] bg-[#0A0A0A] shadow-2xl group">
+          <div className="relative overflow-hidden min-h-[22rem] sm:min-h-[24rem] border border-[#1A1A1A] border-t-2 border-t-[#FF7800] bg-[#0A0A0A] shadow-2xl group">
             <Image
               src="/medias/hero-full.webp"
               alt="Team ALAZ Crew"
@@ -47,10 +47,10 @@ export function Footer() {
               className="object-cover object-center opacity-40 transition-transform duration-700 group-hover:scale-105"
             />
             {/* Dark gradient & ember overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/90 via-[#0A0A0A]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/90 via-[#0A0A0A]/60 to-transparent pointer-events-none" />
 
-            <div className="absolute inset-0 flex flex-col justify-between p-8 sm:p-12 md:p-16">
+            <div className="relative z-10 flex flex-col justify-between min-h-[22rem] sm:min-h-[24rem] p-8 sm:p-12 md:p-16 gap-8">
               <div>
                 <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#FFFFFF] max-w-2xl leading-tight">
                   {siteCollection.contact.tagline || "Join the Team & Support Our Mission"}
@@ -104,7 +104,7 @@ export function Footer() {
               </div>
 
               <div className="space-y-1.5 pt-4 border-t border-[#1A1A1A] max-w-sm">
-                <p className="font-mono text-xs uppercase tracking-[0.05em] text-[#666666]">
+                <p className="font-mono text-xs uppercase tracking-[0.05em] text-[#A0A0A0]">
                   Location
                 </p>
                 <p className="font-sans text-sm text-[#E8E8E8]">
@@ -155,7 +155,7 @@ export function Footer() {
               </div>
 
               <div className="space-y-3">
-                <h3 className="font-mono text-xs uppercase tracking-[0.05em] text-[#666666]">
+                <h3 className="font-mono text-xs uppercase tracking-[0.05em] text-[#A0A0A0]">
                   Connect & Socials
                 </h3>
                 <div className="grid grid-cols-2 gap-2">
@@ -170,7 +170,7 @@ export function Footer() {
                       <span className="font-sans text-xs font-medium text-[#E8E8E8] group-hover:text-[#FF7800] transition-colors">
                         {social.platform}
                       </span>
-                      <span className="font-mono text-[11px] text-[#666666] truncate mt-0.5">
+                      <span className="font-mono text-[11px] text-[#A0A0A0] truncate mt-0.5">
                         {social.handle}
                       </span>
                     </a>
@@ -183,13 +183,13 @@ export function Footer() {
           {/* Bottom Legal, Copyright & Back to Top Bar */}
           <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <p className="font-mono text-xs text-[#666666]">
+              <p className="font-mono text-xs text-[#A0A0A0]">
                 © Team ALAZ. All rights reserved.
               </p>
-              <p className="font-mono text-xs text-[#555555]">
+              <p className="font-mono text-xs text-[#949494]">
                 FIRST Robotics Competition · {siteCollection.contact?.locationLabel || siteCollection.teamInfo?.location || "İzmir, Türkiye"}
               </p>
-              <p className="font-mono text-xs text-[#666666]">
+              <p className="font-mono text-xs text-[#A0A0A0]">
                 Made by{" "}
                 <a
                   href="https://xn--efearabac-3pb.com/"

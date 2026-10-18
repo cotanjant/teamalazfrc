@@ -117,7 +117,7 @@ export function DepartmentsSection() {
                     <span className="font-mono text-xs font-semibold tracking-wider text-[#FF7800]">
                       {indexStr}
                     </span>
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-[#666666] group-hover:text-[#D0D0D0] transition-colors">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-[#A0A0A0] group-hover:text-[#D0D0D0] transition-colors">
                       {dept.category}
                     </span>
                   </div>

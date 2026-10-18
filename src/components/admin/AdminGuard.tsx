@@ -8,10 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Flame, ShieldAlert, Lock } from "lucide-react";
 
-const SESSION_KEY = "alaz_admin_session_token";
-
 export interface AdminAuthContextType {
-  token: string | null;
+  token?: string | null;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -31,7 +29,6 @@ interface AdminGuardProps {
 }
 
 export function AdminGuard({ children }: AdminGuardProps) {
-  const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,9 +47,6 @@ export function AdminGuard({ children }: AdminGuardProps) {
           const data = await res.json();
           if (isMounted && data.authenticated) {
             setIsAuthenticated(true);
-            if (data.token) {
-              setToken(data.token);
-            }
           }
         }
       } catch {
@@ -92,9 +86,6 @@ export function AdminGuard({ children }: AdminGuardProps) {
       }
 
       setIsAuthenticated(true);
-      if (data.token) {
-        setToken(data.token);
-      }
       setPassword("");
     } catch {
       setError("Doğrulama servisine bağlanırken ağ veya sunucu hatası oluştu.");
@@ -112,10 +103,6 @@ export function AdminGuard({ children }: AdminGuardProps) {
     } catch {
       // Ignore network errors on logout
     }
-    try {
-      sessionStorage.removeItem(SESSION_KEY);
-    } catch {}
-    setToken(null);
     setIsAuthenticated(false);
   };
 
@@ -213,7 +200,7 @@ export function AdminGuard({ children }: AdminGuardProps) {
   return (
     <AdminAuthContext.Provider
       value={{
-        token,
+        token: null,
         logout: handleLogout,
         isAuthenticated,
       }}
@@ -224,6 +211,5 @@ export function AdminGuard({ children }: AdminGuardProps) {
 }
 
 export function getAdminSessionToken(): string | null {
-  if (typeof window === "undefined") return null;
-  return sessionStorage.getItem(SESSION_KEY);
+  return null;
 }
