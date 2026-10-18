@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,6 +25,16 @@ const MENU_ITEMS = [
 export function Navbar() {
   const headerRef = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMenuOpenRef = useRef(false);
+
+  // Sync ref and ensure header is visible when menu opens
+  useEffect(() => {
+    isMenuOpenRef.current = isMenuOpen;
+    if (isMenuOpen && headerRef.current) {
+      headerRef.current.classList.remove("-translate-y-full");
+    }
+  }, [isMenuOpen]);
 
   // Scroll-aware hide on scroll down past 80px, reveal on scroll up via GSAP ScrollTrigger
   useEffect(() => {
@@ -40,6 +50,12 @@ export function Navbar() {
       start: 0,
       end: "max",
       onUpdate: (self) => {
+        // Keep navbar visible if staggered mobile menu is open
+        if (isMenuOpenRef.current) {
+          header.classList.remove("-translate-y-full");
+          return;
+        }
+
         const currentScroll = self.scroll();
         const delta = currentScroll - lastScroll;
 
@@ -139,6 +155,8 @@ export function Navbar() {
           menuButtonColor="#E8E8E8"
           openMenuButtonColor="#FF7800"
           accentColor="#FF7800"
+          onMenuOpen={() => setIsMenuOpen(true)}
+          onMenuClose={() => setIsMenuOpen(false)}
         />
       </div>
     </header>

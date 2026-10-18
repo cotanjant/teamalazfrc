@@ -614,6 +614,7 @@ export const GradientASCII = ({
     let disposed = false;
 
     const syncAtlas = () => {
+      if (gl.isContextLost()) return;
       const s = settingsRef.current;
       const key = `${s.fontFamily}|${s.characters}`;
       if (key === atlasKey && atlas) return;
@@ -622,7 +623,7 @@ export const GradientASCII = ({
       atlas = buildAtlas(gl, s.characters, s.fontFamily);
       document.fonts?.load?.(`300 64px ${s.fontFamily}`, s.characters).then(
         () => {
-          if (disposed || atlasKey !== key) return;
+          if (disposed || gl.isContextLost() || atlasKey !== key) return;
           if (atlas) gl.deleteTexture(atlas.texture);
           atlas = buildAtlas(gl, s.characters, s.fontFamily);
           draw();
@@ -673,6 +674,7 @@ export const GradientASCII = ({
     };
 
     const draw = () => {
+      if (gl.isContextLost()) return;
       const s = settingsRef.current;
       const aspect = view.width / view.height;
       syncAtlas();
@@ -741,6 +743,7 @@ export const GradientASCII = ({
     };
 
     const resize = () => {
+      if (gl.isContextLost()) return;
       const s = settingsRef.current;
       view.width = Math.max(1, container.clientWidth);
       view.height = Math.max(1, container.clientHeight);
@@ -870,7 +873,11 @@ export const GradientASCII = ({
         wake();
       }
     });
-    intersection.observe(container);
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      cancelAnimationFrame(raf);
+    };
+    canvas.addEventListener('webglcontextlost', onContextLost);
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('pointerdown', onPointerDown, { passive: true });
     document.addEventListener('visibilitychange', onVisibility);
@@ -881,25 +888,27 @@ export const GradientASCII = ({
       disposed = true;
       cancelAnimationFrame(raf);
       wakeRef.current = null;
+      canvas.removeEventListener('webglcontextlost', onContextLost);
       resizeObserver.disconnect();
       intersection.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerdown', onPointerDown);
       document.removeEventListener('visibilitychange', onVisibility);
-      [fieldTarget, haloA, haloB].forEach(target => {
-        target.textures.forEach(texture => gl.deleteTexture(texture));
-        gl.deleteFramebuffer(target.framebuffer);
-      });
-      if (atlas) gl.deleteTexture(atlas.texture);
-      gl.deleteVertexArray(vao);
-      [field, halo, blur, composite].forEach(item => gl.deleteProgram(item.program));
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      if (!gl.isContextLost()) {
+        [fieldTarget, haloA, haloB].forEach(target => {
+          target.textures.forEach(texture => gl.deleteTexture(texture));
+          gl.deleteFramebuffer(target.framebuffer);
+        });
+        if (atlas) gl.deleteTexture(atlas.texture);
+        gl.deleteVertexArray(vao);
+        [field, halo, blur, composite].forEach(item => gl.deleteProgram(item.program));
+      }
     };
   }, []);
 
   useEffect(() => {
     wakeRef.current?.();
-  });
+  }, [shape, characters, speed, colors]);
 
   return (
     <div

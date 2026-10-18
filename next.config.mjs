@@ -1,5 +1,16 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const isVercel = Boolean(process.env.VERCEL);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output:
+    !isVercel && (process.env.BUILD_STANDALONE || (process.platform !== "win32" && process.env.NODE_ENV === "production"))
+      ? "standalone"
+      : undefined,
+  outputFileTracingRoot: isVercel ? undefined : __dirname,
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
@@ -10,6 +21,10 @@ const nextConfig = {
       {
         source: "/:path*",
         headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
           {
             key: "X-Frame-Options",
             value: "DENY",

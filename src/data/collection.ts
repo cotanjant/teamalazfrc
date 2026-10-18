@@ -24,13 +24,13 @@ export interface TeamInfo {
   logoFullFallback: string;
 }
 
-export interface NavItem {
+export type NavItem = {
   id: string;
   label: string;
   href: string;
   code: string;
   isExternal?: boolean;
-}
+};
 
 export interface CtaLink {
   label: string;
@@ -52,7 +52,7 @@ export interface HeroContent {
   coordinates?: string;
 }
 
-export interface StatItem {
+export type StatItem = {
   id: string;
   value: number | string;
   suffix: string;
@@ -60,7 +60,7 @@ export interface StatItem {
   code: string;
   description: string;
   isPlaceholder?: boolean;
-}
+};
 
 export interface TeamSectionContent {
   id: string;
@@ -75,13 +75,13 @@ export interface TeamSectionContent {
   mediaAlt: string;
 }
 
-export interface DepartmentItem {
+export type DepartmentItem = {
   id: string;
   code: string;
   name: string;
   description: string;
-  category: "Engineering" | "Operations";
-}
+  category: "Engineering" | "Operations" | (string & {});
+};
 
 export interface MissionVisionBlock {
   code: string;
@@ -136,14 +136,14 @@ export interface RobotContent {
   subsystems: RobotSubsystemItem[];
 }
 
-export interface OutreachStat {
+export type OutreachStat = {
   label: string;
   value: string;
   code: string;
   placeholder?: boolean;
-}
+};
 
-export interface OutreachProjectItem {
+export type OutreachProjectItem = {
   id: string;
   code: string;
   title: string;
@@ -153,7 +153,7 @@ export interface OutreachProjectItem {
   impactMetric: string;
   location: string;
   placeholder?: boolean;
-}
+};
 
 export interface OutreachContent {
   id: string;
@@ -166,7 +166,7 @@ export interface OutreachContent {
   projects: OutreachProjectItem[];
 }
 
-export interface PartnerSlotItem {
+export type PartnerSlotItem = {
   id: string;
   code?: string;
   name: string;
@@ -174,7 +174,7 @@ export interface PartnerSlotItem {
   role: string;
   href?: string;
   placeholder?: boolean;
-}
+};
 
 export interface PartnersContent {
   id: string;
@@ -187,7 +187,7 @@ export interface PartnersContent {
   tiers: PartnerSlotItem[];
 }
 
-export interface CrewGalleryItem {
+export type CrewGalleryItem = {
   id: string;
   code: string;
   src: string;
@@ -195,16 +195,16 @@ export interface CrewGalleryItem {
   alt: string;
   caption: string;
   departmentTag: string;
-  aspect: "landscape" | "portrait" | "square";
-}
+  aspect: "landscape" | "portrait" | "square" | (string & {});
+};
 
-export interface SocialAccount {
+export type SocialAccount = {
   id: string;
-  platform: "Instagram" | "X" | "TikTok" | "YouTube";
+  platform: "Instagram" | "X" | "TikTok" | "YouTube" | (string & {});
   handle: string;
   href: string;
   code: string;
-}
+};
 
 export interface MediaContent {
   id: string;
@@ -243,6 +243,6 @@ export interface SiteCollection {
   contact: ContactContent;
 }
 
-export const siteCollection: SiteCollection = collectionData as unknown as SiteCollection;
+export const siteCollection: SiteCollection = collectionData satisfies SiteCollection;
 
 export default siteCollection;
