@@ -28,7 +28,7 @@ import { ConfirmDialog } from "./ConfirmDialog";
 
 /**
  * Turkish-aware string comparison function.
- * Accurately sorts letters like ç, ğ, ı, i, ö, ş, ü with numeric handling.
+ * Accurately sorts letters like c, g, i, i, o, s, u with numeric handling.
  */
 export function turkishCompare(a: unknown, b: unknown): number {
   if (a === b) return 0;
@@ -105,12 +105,12 @@ export function AdminDataTable<T extends Record<string, any>>({
   addLabel = "+ Yeni Ekle",
   onEdit,
   onDelete,
-  deleteConfirmTitle = "Kaydı Sil",
+  deleteConfirmTitle = "Kaydi Sil",
   deleteConfirmDescription,
   onReorder,
   keyExtractor,
-  emptyTitle = "Kayıt bulunamadı",
-  emptyDescription = "Listelenecek herhangi bir veri kaydı mevcut değil.",
+  emptyTitle = "Kayit bulunamadi",
+  emptyDescription = "Listelenecek herhangi bir veri kaydi mevcut degil.",
   pageSize = 25,
   className = "",
   headerAction,
@@ -297,7 +297,7 @@ export function AdminDataTable<T extends Record<string, any>>({
                       <SelectValue placeholder={filter.label} />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0A0A0A] border-[#1A1A1A] text-zinc-200 rounded-none">
-                      <SelectItem value="ALL">{filter.allLabel || `Tümü (${filter.label})`}</SelectItem>
+                      <SelectItem value="ALL">{filter.allLabel || `Tumu (${filter.label})`}</SelectItem>
                       {filter.options.map((opt) => (
                         <SelectItem key={opt.value} value={opt.value}>
                           {opt.label}
@@ -333,7 +333,7 @@ export function AdminDataTable<T extends Record<string, any>>({
         <table className="w-full text-left border-collapse text-xs">
           <thead>
             <tr className="border-b border-[#1A1A1A] bg-[#0A0A0A] text-zinc-400 font-mono tracking-wider text-[11px] uppercase">
-              {onReorder && <th className="py-2.5 px-3 w-12 text-center">Sıra</th>}
+              {onReorder && <th className="py-2.5 px-3 w-12 text-center">Sira</th>}
               {columns.map((col, cIdx) => (
                 <th
                   key={String(col.key) || cIdx}
@@ -369,7 +369,7 @@ export function AdminDataTable<T extends Record<string, any>>({
                 </th>
               ))}
               {(onEdit || onDelete || renderCustomRowActions) && (
-                <th className="py-2.5 px-3.5 text-right w-24">İşlemler</th>
+                <th className="py-2.5 px-3.5 text-right w-24">Islemler</th>
               )}
             </tr>
           </thead>
@@ -385,7 +385,7 @@ export function AdminDataTable<T extends Record<string, any>>({
                   className="p-8"
                 >
                   <EmptyState
-                    title={hasActiveFilters ? "Filtrelere uygun sonuç bulunamadı" : emptyTitle}
+                    title={hasActiveFilters ? "Filtrelere uygun sonuc bulunamadi" : emptyTitle}
                     description={
                       hasActiveFilters
                         ? "Arama veya filtre kriterlerini temizleyerek tekrar deneyebilirsiniz."
@@ -393,7 +393,7 @@ export function AdminDataTable<T extends Record<string, any>>({
                     }
                     actionLabel={!hasActiveFilters && onAdd ? addLabel.replace(/^\+\s*/, "") : undefined}
                     onAction={!hasActiveFilters && onAdd ? onAdd : undefined}
-                    secondaryActionLabel={hasActiveFilters ? "Filtreleri Sıfırla" : undefined}
+                    secondaryActionLabel={hasActiveFilters ? "Filtreleri Sifirla" : undefined}
                     onSecondaryAction={
                       hasActiveFilters
                         ? () => {
@@ -427,7 +427,7 @@ export function AdminDataTable<T extends Record<string, any>>({
                             disabled={originalIdx === 0}
                             onClick={() => onReorder(originalIdx, originalIdx - 1)}
                             className="p-0.5 text-zinc-500 hover:text-orange-400 disabled:opacity-20 disabled:hover:text-zinc-500 focus:outline-none"
-                            title="Yukarı taşı"
+                            title="Yukari tasi"
                           >
                             <ChevronUp className="w-3 h-3" />
                           </button>
@@ -436,7 +436,7 @@ export function AdminDataTable<T extends Record<string, any>>({
                             disabled={originalIdx === data.length - 1}
                             onClick={() => onReorder(originalIdx, originalIdx + 1)}
                             className="p-0.5 text-zinc-500 hover:text-orange-400 disabled:opacity-20 disabled:hover:text-zinc-500 focus:outline-none"
-                            title="Aşağı taşı"
+                            title="Asagi tasi"
                           >
                             <ChevronDown className="w-3 h-3" />
                           </button>
@@ -473,8 +473,8 @@ export function AdminDataTable<T extends Record<string, any>>({
                               type="button"
                               onClick={() => onEdit(item, originalIdx)}
                               className="min-h-[44px] min-w-[44px] sm:min-h-[32px] sm:min-w-[32px] inline-flex items-center justify-center p-1 rounded-none text-zinc-400 hover:text-white hover:bg-[#1A1A1A] transition-colors"
-                              title="Düzenle"
-                              aria-label="Düzenle"
+                              title="Duzenle"
+                              aria-label="Duzenle"
                             >
                               <Pencil className="w-3.5 h-3.5" />
                             </button>
@@ -506,7 +506,7 @@ export function AdminDataTable<T extends Record<string, any>>({
       {sortedData.length > 0 && (
         <div className="p-3 px-4 border-t border-[#1A1A1A] bg-[#0A0A0A] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400 font-mono">
           <div>
-            Toplam {sortedData.length} kayıt {hasActiveFilters && `(${data.length} içinden filtrelendi)`}
+            Toplam {sortedData.length} kayit {hasActiveFilters && `(${data.length} icinden filtrelendi)`}
           </div>
 
           {totalPages > 1 && (
@@ -519,7 +519,7 @@ export function AdminDataTable<T extends Record<string, any>>({
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 className="border-[#1A1A1A] bg-[#000000] text-xs text-zinc-300 hover:text-white h-7 px-2.5 rounded-none"
               >
-                Önceki
+                Onceki
               </Button>
               <span className="text-zinc-400 text-xs px-2">
                 {currentPage} / {totalPages}
@@ -550,10 +550,10 @@ export function AdminDataTable<T extends Record<string, any>>({
           description={
             deleteConfirmDescription
               ? deleteConfirmDescription(itemToDelete.item)
-              : "Bu kaydı kalıcı olarak silmek istediğinizden emin misiniz? Yapılan değişiklik kaydedilene kadar 'Geri Al' ile geri alınabilir."
+              : "Bu kaydi kalici olarak silmek istediginizden emin misiniz? Yapilan degisiklik kaydedilene kadar 'Geri Al' ile geri alinabilir."
           }
           confirmLabel="Sil"
-          cancelLabel="İptal"
+          cancelLabel="Iptal"
           variant="danger"
           onConfirm={() => {
             onDelete(itemToDelete.item, itemToDelete.index);

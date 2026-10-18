@@ -151,7 +151,7 @@ export const pureMutators = {
     const nextCode = String(state.navigation.length + 1).padStart(2, "0");
     const newItem: NavItem = {
       id: item?.id || `nav-${Date.now()}`,
-      label: item?.label || "Yeni Bağlantı",
+      label: item?.label || "Yeni Baglanti",
       href: item?.href || "/#",
       code: item?.code || nextCode,
       isExternal: item?.isExternal || false,
@@ -503,7 +503,7 @@ export const pureMutators = {
       status: project?.status || "Active",
       summary: project?.summary || "Project mission statement and scope",
       impactMetric: project?.impactMetric || "100+ Students",
-      location: project?.location || "İzmir, TR",
+      location: project?.location || "Izmir, TR",
       placeholder: project?.placeholder,
     };
     return {

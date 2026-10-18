@@ -26,7 +26,7 @@ export function AdminHeader() {
         <button
           onClick={() => setIsMobileSidebarOpen(true)}
           className="p-2 -ml-2 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#141414] md:hidden transition-colors"
-          aria-label="Menüyü Aç"
+          aria-label="Menuyu Ac"
         >
           <Menu className="w-5 h-5" />
         </button>
@@ -36,7 +36,7 @@ export function AdminHeader() {
           <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#777777] uppercase tracking-wider">
             <span className="hover:text-[#A0A0A0] transition-colors">ALAZ</span>
             <ChevronRight className="w-3 h-3 text-[#555555]" />
-            <span className="hover:text-[#A0A0A0] transition-colors">Yönetim</span>
+            <span className="hover:text-[#A0A0A0] transition-colors">Yonetim</span>
             <ChevronRight className="w-3 h-3 text-[#555555]" />
             <span className="text-[#FF7800] truncate font-semibold">
               {currentSectionInfo.label}
@@ -57,20 +57,20 @@ export function AdminHeader() {
           id="admin-tour-restart-button"
           onClick={() => startAdminTour()}
           className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-none text-xs font-mono font-medium text-[#CCCCCC] bg-[#000000] hover:bg-[#141414] hover:text-white border border-[#1A1A1A] transition-colors uppercase tracking-wider"
-          title="Kullanım rehberini ve interaktif turu başlat"
+          title="Kullanim rehberini ve interaktif turu baslat"
         >
           <Compass className="w-3.5 h-3.5 text-[#FF7800]" />
-          <span className="hidden sm:inline">Rehberi Başlat</span>
+          <span className="hidden sm:inline">Rehberi Baslat</span>
         </button>
 
         {/* Logout Button */}
         <button
           onClick={logout}
           className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-none text-xs font-mono font-medium text-rose-400 hover:text-white hover:bg-rose-950/40 border border-rose-900/40 transition-colors uppercase tracking-wider"
-          title="Oturumu güvenle sonlandır"
+          title="Oturumu guvenle sonlandir"
         >
           <LogOut className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Çıkış Yap</span>
+          <span className="hidden sm:inline">Cikis Yap</span>
         </button>
       </div>
     </header>

@@ -75,7 +75,7 @@ export function ContactSection() {
     },
     {
       key: "handle",
-      title: "Kullanıcı Adı (Handle)",
+      title: "Kullanici Adi (Handle)",
       width: "220px",
       sortable: true,
       render: (item, idx) =>
@@ -91,7 +91,7 @@ export function ContactSection() {
     },
     {
       key: "href",
-      title: "Profil Bağlantısı (URL)",
+      title: "Profil Baglantisi (URL)",
       render: (item, idx) =>
         editingIndex === idx ? (
           <Input
@@ -107,7 +107,7 @@ export function ContactSection() {
                 target="_blank"
                 rel="noreferrer"
                 className="text-[#FF7800] hover:underline font-mono text-xs truncate max-w-sm flex items-center gap-1.5"
-                title="Profili aç"
+                title="Profili ac"
               >
                 <span>{item.href}</span>
                 <ExternalLink className="w-3 h-3 shrink-0" />
@@ -122,7 +122,7 @@ export function ContactSection() {
 
   return (
     <div className="space-y-6">
-      {/* 1. İletişim Bilgileri */}
+      {/* 1. Iletisim Bilgileri */}
       <Card className="bg-[#000000] border-[#1A1A1A] rounded-none shadow-none">
         <CardHeader className="pb-4 border-b border-[#1A1A1A]">
           <div className="flex items-center gap-2.5">
@@ -167,7 +167,7 @@ export function ContactSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <Label htmlFor="field-contact-schoolLabel" className="text-xs text-zinc-400">Okul / Yerleşke Etiketi</Label>
+              <Label htmlFor="field-contact-schoolLabel" className="text-xs text-zinc-400">Okul / Yerleske Etiketi</Label>
               <Input
                 id="field-contact-schoolLabel"
                 value={data.contact.schoolLabel}
@@ -200,7 +200,7 @@ export function ContactSection() {
         </CardContent>
       </Card>
 
-      {/* 2. Sosyal Medya Hesapları Tablosu (DataTable) */}
+      {/* 2. Sosyal Medya Hesaplari Tablosu (DataTable) */}
       <div>
         <AdminDataTable
           data={data.media.socials}
@@ -208,7 +208,7 @@ export function ContactSection() {
           title={t("contact.socialsTitle")}
           subtitle={t("contact.socialsDescription")}
           icon={<Share2 className="w-4 h-4" />}
-          searchPlaceholder="Sosyal medya hesaplarında ara..."
+          searchPlaceholder="Sosyal medya hesaplarinda ara..."
           searchKeys={["platform", "handle", "href"]}
           addLabel="Hesap Ekle"
           onAdd={() =>
@@ -227,9 +227,9 @@ export function ContactSection() {
             }
           }}
           onDelete={(_, originalIndex) => removeSocial(originalIndex)}
-          deleteConfirmTitle="Sosyal Medya Hesabını Sil"
+          deleteConfirmTitle="Sosyal Medya Hesabini Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.platform}' (${item.handle}) hesabını silmek istediğinizden emin misiniz?`
+            `'${item.platform}' (${item.handle}) hesabini silmek istediginizden emin misiniz?`
           }
           onReorder={reorderSocial}
           renderCustomRowActions={(_, originalIndex) =>

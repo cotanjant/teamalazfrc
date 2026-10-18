@@ -26,7 +26,7 @@ export function ConfirmDialog({
   title,
   description,
   confirmLabel = "Onayla",
-  cancelLabel = "İptal",
+  cancelLabel = "Iptal",
   variant = "danger",
   onConfirm,
   isLoading = false,
@@ -120,7 +120,7 @@ export function ConfirmDialog({
                   : "bg-[#FF7800] hover:bg-[#ff8a1e] text-black font-semibold shadow-[0_0_15px_rgba(255,120,0,0.25)]"
               }`}
             >
-              {loading ? "İşleniyor..." : confirmLabel}
+              {loading ? "Isleniyor..." : confirmLabel}
             </Button>
           </div>
         </DialogPrimitive.Content>

@@ -108,7 +108,7 @@ export function Footer() {
                   Location
                 </p>
                 <p className="font-sans text-sm text-[#E8E8E8]">
-                  {siteCollection.contact?.locationLabel || siteCollection.teamInfo?.location || "İzmir, Türkiye"}
+                  {siteCollection.contact?.locationLabel || siteCollection.teamInfo?.location || "Izmir, Turkiye"}
                 </p>
               </div>
             </div>
@@ -187,7 +187,7 @@ export function Footer() {
                 © Team ALAZ. All rights reserved.
               </p>
               <p className="font-mono text-xs text-[#555555]">
-                FIRST Robotics Competition · {siteCollection.contact?.locationLabel || siteCollection.teamInfo?.location || "İzmir, Türkiye"}
+                FIRST Robotics Competition · {siteCollection.contact?.locationLabel || siteCollection.teamInfo?.location || "Izmir, Turkiye"}
               </p>
               <p className="font-mono text-xs text-[#666666]">
                 Made by{" "}
@@ -197,7 +197,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="text-[#888888] hover:text-[#FF7800] underline underline-offset-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7800]"
                 >
-                  Efe Arabacı
+                  Efe Arabaci
                 </a>{" "}
                 ve{" "}
                 <a

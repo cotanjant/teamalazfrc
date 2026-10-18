@@ -66,7 +66,7 @@ export function OutreachSection() {
   const projectColumns: Column<OutreachProjectItem>[] = [
     {
       key: "title",
-      title: "Girişim / Proje Adı",
+      title: "Girisim / Proje Adi",
       width: "280px",
       sortable: true,
       render: (item, idx) =>
@@ -82,7 +82,7 @@ export function OutreachSection() {
     },
     {
       key: "summary",
-      title: "Özet ve Açıklama",
+      title: "Ozet ve Aciklama",
       render: (item, idx) =>
         editingProjectIndex === idx ? (
           <Input
@@ -118,7 +118,7 @@ export function OutreachSection() {
     },
     {
       key: "label",
-      title: "Metrik Başlığı",
+      title: "Metrik Basligi",
       sortable: true,
       render: (item, idx) =>
         editingStatIndex === idx ? (
@@ -133,7 +133,7 @@ export function OutreachSection() {
     },
     {
       key: "value",
-      title: "Değer",
+      title: "Deger",
       width: "120px",
       sortable: true,
       render: (item, idx) =>
@@ -151,7 +151,7 @@ export function OutreachSection() {
 
   return (
     <div className="space-y-6">
-      {/* 1. Sosyal Sorumluluk Genel Bakış */}
+      {/* 1. Sosyal Sorumluluk Genel Bakis */}
       <Card className="bg-[#000000] border-[#1A1A1A] rounded-none shadow-xl">
         <CardHeader className="pb-4 border-b border-[#1A1A1A]">
           <div className="flex items-center gap-2.5">
@@ -170,7 +170,7 @@ export function OutreachSection() {
         </CardHeader>
         <CardContent className="space-y-4 pt-5">
           <div className="space-y-1.5">
-            <Label htmlFor="field-outreach-title" className="text-xs text-zinc-400">Bölüm Üst Başlığı (Kategori)</Label>
+            <Label htmlFor="field-outreach-title" className="text-xs text-zinc-400">Bolum Ust Basligi (Kategori)</Label>
             <Input
               id="field-outreach-title"
               value={data.outreach.title || "Outreach"}
@@ -210,13 +210,13 @@ export function OutreachSection() {
           title={t("outreach.projectsTitle")}
           subtitle={t("outreach.projectsDescription")}
           icon={<HeartHandshake className="w-4 h-4" />}
-          searchPlaceholder="Projelerde ara (başlık, özet)..."
+          searchPlaceholder="Projelerde ara (baslik, ozet)..."
           searchKeys={["title", "summary"]}
           addLabel="Yeni Proje Ekle"
           onAdd={() =>
             addOutreachProject({
-              title: "Yeni Sosyal Sorumluluk Girişimi",
-              summary: "Girişimin hedef kitlesi ve etki kapsamı...",
+              title: "Yeni Sosyal Sorumluluk Girisimi",
+              summary: "Girisimin hedef kitlesi ve etki kapsami...",
               code: `OUT-${String(data.outreach.projects.length + 1).padStart(2, "0")}`,
             })
           }
@@ -230,7 +230,7 @@ export function OutreachSection() {
           onDelete={(_, originalIndex) => removeOutreachProject(originalIndex)}
           deleteConfirmTitle="Projeyi Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.title}' projesini listeden silmek istediğinizden emin misiniz?`
+            `'${item.title}' projesini listeden silmek istediginizden emin misiniz?`
           }
           onReorder={reorderOutreachProject}
           renderCustomRowActions={(_, originalIndex) =>
@@ -255,14 +255,14 @@ export function OutreachSection() {
           data={data.outreach.stats}
           columns={statColumns}
           title="Toplumsal Etki Metrikleri"
-          subtitle="Sosyal sorumluluk projelerinin kümülatif erişim ve etki verileri."
+          subtitle="Sosyal sorumluluk projelerinin kumulatif erisim ve etki verileri."
           icon={<BarChart className="w-4 h-4" />}
           searchPlaceholder="Etki metriklerinde ara..."
           searchKeys={["label", "value", "code"]}
           addLabel="Yeni Metrik Ekle"
           onAdd={() =>
             addOutreachStat({
-              label: "Eğitim Alan Öğrenci",
+              label: "Egitim Alan Ogrenci",
               value: "250+",
               code: `STAT-${String(data.outreach.stats.length + 1).padStart(2, "0")}`,
             })
@@ -275,9 +275,9 @@ export function OutreachSection() {
             }
           }}
           onDelete={(_, originalIndex) => removeOutreachStat(originalIndex)}
-          deleteConfirmTitle="Etki Metriğini Sil"
+          deleteConfirmTitle="Etki Metrigini Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.label}' (${item.value}) metriğini silmek istediğinizden emin misiniz?`
+            `'${item.label}' (${item.value}) metrigini silmek istediginizden emin misiniz?`
           }
           renderCustomRowActions={(_, originalIndex) =>
             editingStatIndex === originalIndex ? (

@@ -5,9 +5,9 @@ export const TOUR_STORAGE_KEY = "alaz_admin_tour_completed";
 export const TOUR_STEPS: DriveStep[] = [
   {
     popover: {
-      title: "Hoş Geldiniz: ALAZ #12368 Yönetim Paneli",
+      title: "Hos Geldiniz: ALAZ #12368 Yonetim Paneli",
       description:
-        "Team ALAZ web sitesinin tüm dinamik verilerini, içeriklerini, teknik robot verilerini ve kurumsal kimlik ayarlarını bu panel üzerinden yönetebilirsiniz. Değişiklikleriniz siz onaylayıp 'Değişiklikleri Kaydet' butonuna basana kadar güvenle yerel hafızada tutulur.",
+        "Team ALAZ web sitesinin tum dinamik verilerini, iceriklerini, teknik robot verilerini ve kurumsal kimlik ayarlarini bu panel uzerinden yonetebilirsiniz. Degisiklikleriniz siz onaylayip 'Degisiklikleri Kaydet' butonuna basana kadar guvenle yerel hafizada tutulur.",
       side: "bottom",
       align: "center",
     },
@@ -15,9 +15,9 @@ export const TOUR_STEPS: DriveStep[] = [
   {
     element: "#admin-sidebar",
     popover: {
-      title: "Sol Menü ve 7 Ana Bölüm Navigasyonu",
+      title: "Sol Menu ve 7 Ana Bolum Navigasyonu",
       description:
-        "Sitenin 7 temel bileşenine (Genel & İstatistikler, Takım & Departmanlar, Misyon & Vizyon, Robotik Sistemler, Sosyal Sorumluluk, Destekçiler & Sponsorlar, İletişim & Sosyal Medya) buradan tek tıkla ulaşabilirsiniz.",
+        "Sitenin 7 temel bilesenine (Genel & Istatistikler, Takim & Departmanlar, Misyon & Vizyon, Robotik Sistemler, Sosyal Sorumluluk, Destekciler & Sponsorlar, Iletisim & Sosyal Medya) buradan tek tikla ulasabilirsiniz.",
       side: "right",
       align: "start",
     },
@@ -25,9 +25,9 @@ export const TOUR_STEPS: DriveStep[] = [
   {
     element: "#admin-active-section",
     popover: {
-      title: "Çalışma Alanı ve Veri Formları",
+      title: "Calisma Alani ve Veri Formlari",
       description:
-        "Seçili bölümün metin, bağlantı ve durum alanlarını buradan düzenleyebilirsiniz. Başlıklar, mottolar, sayfa açıklamaları ve teknik değerler doğrudan canlı site ile senkronizedir.",
+        "Secili bolumun metin, baglanti ve durum alanlarini buradan duzenleyebilirsiniz. Basliklar, mottolar, sayfa aciklamalari ve teknik degerler dogrudan canli site ile senkronizedir.",
       side: "top",
       align: "start",
     },
@@ -35,9 +35,9 @@ export const TOUR_STEPS: DriveStep[] = [
   {
     element: "#admin-data-table",
     popover: {
-      title: "Tablo Yönetimi, Düzenleme ve Sıralama",
+      title: "Tablo Yonetimi, Duzenleme ve Siralama",
       description:
-        "Menü bağlantıları, departmanlar, robot teknik özellikleri ve sponsorlar gibi dinamik listeleri tablolardan yönetin. Satır içi kalem butonuyla anında düzenleyebilir, yukarı ve aşağı oklarla site içi sıralamayı değiştirebilir, çöp kutusu butonuyla güvenli silme yapabilirsiniz.",
+        "Menu baglantilari, departmanlar, robot teknik ozellikleri ve sponsorlar gibi dinamik listeleri tablolardan yonetin. Satir ici kalem butonuyla aninda duzenleyebilir, yukari ve asagi oklarla site ici siralamayi degistirebilir, cop kutusu butonuyla guvenli silme yapabilirsiniz.",
       side: "top",
       align: "center",
     },
@@ -45,9 +45,9 @@ export const TOUR_STEPS: DriveStep[] = [
   {
     element: "#admin-dirty-badge",
     popover: {
-      title: "Değişiklik Takibi ve Geri Alma",
+      title: "Degisiklik Takibi ve Geri Alma",
       description:
-        "Yapılan tüm düzenlemeler anlık olarak izlenir ve değişen alan sayısı bu rozette gösterilir. İhtiyaç halinde tek tıkla önceki haline geri alabilirsiniz.",
+        "Yapilan tum duzenlemeler anlik olarak izlenir ve degisen alan sayisi bu rozette gosterilir. Ihtiyac halinde tek tikla onceki haline geri alabilirsiniz.",
       side: "bottom",
       align: "start",
     },
@@ -55,9 +55,9 @@ export const TOUR_STEPS: DriveStep[] = [
   {
     element: "#admin-save-button",
     popover: {
-      title: "Değişiklikleri Yayınlama ve Kaydetme",
+      title: "Degisiklikleri Yayinlama ve Kaydetme",
       description:
-        "Tüm güncellemelerinizi tamamladığınızda bu butona basarak verileri GitHub Proxy API aracılığıyla depoya kaydedebilirsiniz. Başarılı kayıt sonrası site otomatik olarak güncellenir.",
+        "Tum guncellemelerinizi tamamladiginizda bu butona basarak verileri GitHub Proxy API araciligiyla depoya kaydedebilirsiniz. Basarili kayit sonrasi site otomatik olarak guncellenir.",
       side: "bottom",
       align: "end",
     },
@@ -65,9 +65,9 @@ export const TOUR_STEPS: DriveStep[] = [
   {
     element: "#admin-tour-restart-button",
     popover: {
-      title: "İnteraktif Rehber ve Kılavuz",
+      title: "Interaktif Rehber ve Kilavuz",
       description:
-        "Panelin kullanımına dair bu interaktif turu dilediğiniz an bu butona tıklayarak baştan başlatabilirsiniz. Klavyenizden ESC tuşuna basarak istediğiniz zaman rehberden çıkabilirsiniz.",
+        "Panelin kullanimina dair bu interaktif turu dilediginiz an bu butona tiklayarak bastan baslatabilirsiniz. Klavyenizden ESC tusuna basarak istediginiz zaman rehberden cikabilirsiniz.",
       side: "bottom",
       align: "end",
     },
@@ -84,7 +84,7 @@ export const TOUR_CONFIG: Config = {
   allowKeyboardControl: true,
   skipMissingElement: true,
   popoverClass: "alaz-tour-popover",
-  nextBtnText: "İleri",
+  nextBtnText: "Ileri",
   prevBtnText: "Geri",
   doneBtnText: "Tamamla",
   closeBtnLabel: "Rehberi Kapat",

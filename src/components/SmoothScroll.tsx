@@ -45,7 +45,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
         );
       },
       virtualScroll: (data) => {
-        // Mobilde / dar ekranda veya dokunmatik cihazlarda Lenis'in dokunmatik olayları ele geçirmemesini sağla
+        // Mobilde / dar ekranda veya dokunmatik cihazlarda Lenis'in dokunmatik olaylari ele gecirmemesini sagla
         if (
           data.event.type.startsWith("touch") &&
           (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768)

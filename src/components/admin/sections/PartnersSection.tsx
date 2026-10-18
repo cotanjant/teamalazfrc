@@ -46,7 +46,7 @@ export function PartnersSection() {
   const columns: Column<PartnerSlotItem>[] = [
     {
       key: "name",
-      title: "Destekçi / Kurum Adı",
+      title: "Destekci / Kurum Adi",
       sortable: true,
       render: (item, idx) =>
         editingIndex === idx ? (
@@ -64,7 +64,7 @@ export function PartnersSection() {
                 target="_blank"
                 rel="noreferrer"
                 className="text-zinc-500 hover:text-[#FF7800] transition-colors"
-                title="Web sitesini aç"
+                title="Web sitesini ac"
               >
                 <ExternalLink className="w-3 h-3" />
               </a>
@@ -74,7 +74,7 @@ export function PartnersSection() {
     },
     {
       key: "role",
-      title: "Katkı / Rol Tanımı",
+      title: "Katki / Rol Tanimi",
       render: (item, idx) =>
         editingIndex === idx ? (
           <Input
@@ -115,7 +115,7 @@ export function PartnersSection() {
 
   return (
     <div className="space-y-6">
-      {/* 1. Destekçiler ve Sponsorlar Genel Bakış */}
+      {/* 1. Destekciler ve Sponsorlar Genel Bakis */}
       <Card className="bg-[#000000] border-[#1A1A1A] rounded-none shadow-xl">
         <CardHeader className="pb-4 border-b border-[#1A1A1A]">
           <div className="flex items-center gap-2.5">
@@ -156,7 +156,7 @@ export function PartnersSection() {
         </CardContent>
       </Card>
 
-      {/* 2. Sponsor ve Paydaşlar Tablosu */}
+      {/* 2. Sponsor ve Paydaslar Tablosu */}
       <div>
         <AdminDataTable
           data={data.partners.tiers}
@@ -164,13 +164,13 @@ export function PartnersSection() {
           title={t("partners.tiersTitle")}
           subtitle={t("partners.tiersDescription")}
           icon={<Award className="w-4 h-4" />}
-          searchPlaceholder="Destekçilerde ara (isim, rol, web bağlantısı)..."
+          searchPlaceholder="Destekcilerde ara (isim, rol, web baglantisi)..."
           searchKeys={["name", "role", "href"]}
           addLabel="Yeni Sponsor Ekle"
           onAdd={() =>
             addPartner({
               name: "Yeni Sponsor Kurum",
-              role: "Teknik ve Donanım Desteği",
+              role: "Teknik ve Donanim Destegi",
               href: "https://",
               code: `PARTNER-${String(data.partners.tiers.length + 1).padStart(2, "0")}`,
             })
@@ -185,7 +185,7 @@ export function PartnersSection() {
           onDelete={(_, originalIndex) => removePartner(originalIndex)}
           deleteConfirmTitle="Sponsoru Sil"
           deleteConfirmDescription={(item) =>
-            `'${item.name}' kaydını listeden silmek istediğinizden emin misiniz?`
+            `'${item.name}' kaydini listeden silmek istediginizden emin misiniz?`
           }
           onReorder={reorderPartner}
           renderCustomRowActions={(_, originalIndex) =>

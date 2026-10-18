@@ -56,7 +56,7 @@ export function AdminSidebar() {
         className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-[#000000] border-r border-[#1A1A1A] flex flex-col md:hidden transition-transform duration-300 ease-in-out ${
           isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        aria-label="Mobil Yönetim Menüsü"
+        aria-label="Mobil Yonetim Menusu"
       >
         <SidebarContent
           isCollapsed={false}
@@ -73,7 +73,7 @@ export function AdminSidebar() {
         className={`hidden md:flex flex-col h-full bg-[#000000] border-r border-[#1A1A1A] transition-[width] duration-300 ease-in-out shrink-0 select-none ${
           isSidebarCollapsed ? "w-[72px]" : "w-64"
         }`}
-        aria-label="Yönetim Sidebar"
+        aria-label="Yonetim Sidebar"
       >
         <SidebarContent
           isCollapsed={isSidebarCollapsed}
@@ -111,8 +111,8 @@ function SidebarContent({
           <button
             onClick={onToggleCollapse}
             className="p-1.5 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#1A1A1A] transition-colors"
-            aria-label={isCollapsed ? "Menüyü Genişlet" : "Menüyü Daralt"}
-            title={isCollapsed ? "Menüyü Genişlet" : "Menüyü Daralt"}
+            aria-label={isCollapsed ? "Menuyu Genislet" : "Menuyu Daralt"}
+            title={isCollapsed ? "Menuyu Genislet" : "Menuyu Daralt"}
           >
             {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
           </button>
@@ -122,7 +122,7 @@ function SidebarContent({
           <button
             onClick={onCloseMobile}
             className="p-1.5 rounded-none text-[#A0A0A0] hover:text-white hover:bg-[#1A1A1A] transition-colors ml-auto"
-            aria-label="Menüyü Kapat"
+            aria-label="Menuyu Kapat"
           >
             <X className="w-5 h-5" />
           </button>
@@ -133,11 +133,11 @@ function SidebarContent({
       <div className="flex-1 overflow-y-auto overflow-x-hidden p-2 space-y-1 scrollbar-thin">
         {!isCollapsed && (
           <div className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest text-[#666666]">
-            Yönetim Bölümleri
+            Yonetim Bolumleri
           </div>
         )}
 
-        <nav className="space-y-1" aria-label="Bölüm Seçimi">
+        <nav className="space-y-1" aria-label="Bolum Secimi">
           {ADMIN_SECTIONS.map((section) => {
             const Icon = ICON_MAP[section.iconName] || LayoutDashboard;
             const isActive = activeSection === section.id;
@@ -191,7 +191,7 @@ function SidebarContent({
           href="/"
           target="_blank"
           rel="noreferrer"
-          title={isCollapsed ? "Siteyi Gör ↗" : undefined}
+          title={isCollapsed ? "Siteyi Gor ↗" : undefined}
           className={`flex items-center gap-3 px-3 py-2 rounded-md text-xs font-mono text-[#A0A0A0] hover:text-white hover:bg-[#141414] transition-colors ${
             isCollapsed ? "justify-center px-0" : ""
           }`}
@@ -199,7 +199,7 @@ function SidebarContent({
           <ExternalLink className="w-4 h-4 shrink-0 text-[#FF7800]" />
           {!isCollapsed && (
             <span className="flex-1 truncate uppercase tracking-wider text-[11px]">
-              Siteyi Gör
+              Siteyi Gor
             </span>
           )}
         </Link>
@@ -208,11 +208,11 @@ function SidebarContent({
         {onToggleCollapse && (
           <button
             onClick={onToggleCollapse}
-            title={isCollapsed ? "Menüyü Genişlet" : "Menüyü Daralt"}
+            title={isCollapsed ? "Menuyu Genislet" : "Menuyu Daralt"}
             className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs font-mono text-[#777777] hover:text-[#E8E8E8] hover:bg-[#141414] transition-colors ${
               isCollapsed ? "justify-center px-0" : ""
             }`}
-            aria-label={isCollapsed ? "Sidebarı Genişlet" : "Sidebarı Daralt"}
+            aria-label={isCollapsed ? "Sidebari Genislet" : "Sidebari Daralt"}
           >
             {isCollapsed ? (
               <ChevronRight className="w-4 h-4" />
