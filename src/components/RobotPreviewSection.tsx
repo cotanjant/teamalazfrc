@@ -1,16 +1,9 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { siteCollection } from "@/data/collection";
-
-gsap.registerPlugin(ScrollTrigger);
+import { GsapSectionAnimator } from "@/components/GsapSectionAnimator";
 
 export function RobotPreviewSection() {
   const { robot } = siteCollection;
-  const sectionRef = useRef<HTMLElement>(null);
 
   // Dynamic items if registered via collection / CMS
   const items = Array.isArray(robot.items) ? robot.items : [];
@@ -24,52 +17,21 @@ export function RobotPreviewSection() {
         ? "grid-cols-1 md:grid-cols-2"
         : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      const reveals = gsap.utils.toArray<HTMLElement>(".robot-reveal");
-
-      gsap.fromTo(
-        reveals,
-        {
-          opacity: 0,
-          y: 24,
-          filter: "blur(10px)",
-        },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       id="robot"
-      ref={sectionRef}
       aria-labelledby="robot-preview-heading"
       className="relative border-t border-[#141414] bg-[#000000] py-20 md:py-28 lg:py-32 overflow-hidden"
     >
+      <GsapSectionAnimator
+        sectionId="robot"
+        selector=".robot-reveal"
+        yOffset={24}
+        duration={0.8}
+        stagger={0.1}
+        start="top 80%"
+        blur={10}
+      />
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7">

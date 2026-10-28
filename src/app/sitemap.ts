@@ -1,15 +1,21 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "./seo-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://teamalaz.com";
-  const lastModified = new Date("2026-01-01T00:00:00.000Z");
+  const lastModified = new Date();
 
   return [
     {
-      url: baseUrl,
+      url: SITE_URL,
       lastModified,
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
       priority: 1.0,
+      alternates: {
+        languages: {
+          en: SITE_URL,
+          "x-default": SITE_URL,
+        },
+      },
     },
   ];
 }

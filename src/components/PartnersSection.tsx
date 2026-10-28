@@ -1,15 +1,8 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { siteCollection } from "@/data/collection";
-
-gsap.registerPlugin(ScrollTrigger);
+import { GsapSectionAnimator } from "@/components/GsapSectionAnimator";
 
 export function PartnersSection() {
   const { partners } = siteCollection;
-  const sectionRef = useRef<HTMLElement>(null);
 
   const rawTiers = Array.isArray(partners.tiers) && partners.tiers.length > 0 ? partners.tiers : [];
   const rawSponsors = (Array.isArray(partners.sponsors) ? partners.sponsors : []) as Array<{
@@ -33,52 +26,21 @@ export function PartnersSection() {
   const ctaLabel = partners.cta?.label || "Become a Partner";
   const ctaHref = partners.cta?.href || "#contact";
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>(".partner-reveal");
-
-      gsap.fromTo(
-        items,
-        {
-          opacity: 0,
-          y: 24,
-          filter: "blur(10px)",
-        },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       id="partners"
-      ref={sectionRef}
       aria-labelledby="partners-heading"
       className="relative border-t border-[#141414] bg-[#000000] py-20 md:py-28 lg:py-32"
     >
+      <GsapSectionAnimator
+        sectionId="partners"
+        selector=".partner-reveal"
+        yOffset={24}
+        duration={0.8}
+        stagger={0.1}
+        start="top 80%"
+        blur={10}
+      />
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12">
         {partnerItems.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -183,4 +145,3 @@ export function PartnersSection() {
 }
 
 export default PartnersSection;
-
