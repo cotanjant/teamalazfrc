@@ -256,7 +256,80 @@
       "href": "#contact"
     },
     "sponsors": [],
-    "tiers": []
+    "tiers": [
+      {
+        "id": "partner-1794074065593",
+        "code": "PARTNER-01",
+        "name": "Çaka Group",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://cakagrup.com/ana-sayfa"
+      },
+      {
+        "id": "partner-1794074250370",
+        "code": "PARTNER-02",
+        "name": "Zeits İç ve Dış Ticaret LTD ŞTİ",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://zeitstrading.com"
+      },
+      {
+        "id": "partner-1794074255143",
+        "code": "PARTNER-03",
+        "name": "BEİSCO Mühendislik Makine San. ve Tic. AŞ",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://www.beisco.com.tr/tr/"
+      },
+      {
+        "id": "partner-1794074604363",
+        "code": "PARTNER-04",
+        "name": "Tolkar Smartex",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://www.tolkar.com/tr/"
+      },
+      {
+        "id": "partner-1794074653886",
+        "code": "PARTNER-05",
+        "name": "Aquativ",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://www.aquativ.net"
+      },
+      {
+        "id": "partner-1794074763641",
+        "code": "PARTNER-06",
+        "name": "Eonaks Leather",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://eonaksleather.com/?utm_source=google&utm_medium=cpc&utm_campaign=arama-deri-cuzdan&utm_id=24250209497&utm_term=eonaks&utm_content=198882389966_e&gad_source=1&gad_campaignid=24250209497&gclid=CjwKCAiAtbvXBhB_EiwAjwv9JpxlgyMehVFr1AMaKGVMr3vUKgClaDlPVW9ALIrqKZ-ESu7KeZqz1RoC8VAQAvD_BwE"
+      },
+      {
+        "id": "partner-1794074989286",
+        "code": "PARTNER-07",
+        "name": "Yeditepe Kargo",
+        "tier": "",
+        "role": "Financial and Logistical Support",
+        "href": "https://yeditepecargo.com/tr"
+      },
+      {
+        "id": "partner-1794076975862",
+        "code": "PARTNER-08",
+        "name": "ISDS",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://www.isdsguvenlik.com"
+      },
+      {
+        "id": "partner-1794077007391",
+        "code": "PARTNER-09",
+        "name": "LIONS International",
+        "tier": "",
+        "role": "Financial Support",
+        "href": "https://lionsturkiye.org"
+      }
+    ]
   },
   "media": {
     "id": "crew",
