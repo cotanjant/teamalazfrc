@@ -1,17 +1,18 @@
-import path from "path";
-import { fileURLToPath } from "url";
+import type { NextConfig } from "next";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isVercel = Boolean(process.env.VERCEL);
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   output:
     !isVercel && (process.env.BUILD_STANDALONE || (process.platform !== "win32" && process.env.NODE_ENV === "production"))
       ? "standalone"
       : undefined,
   outputFileTracingRoot: isVercel ? undefined : __dirname,
   reactStrictMode: true,
+  reactCompiler: true,
   images: {
     formats: ["image/avif", "image/webp"],
     unoptimized: false,
