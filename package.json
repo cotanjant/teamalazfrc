@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node -e \"const fs=require('fs'),cp=require('child_process');const target=fs.existsSync('.vercel/output/static/_next/static')?'.vercel/output/static/_next/static':'.next/static/chunks';cp.execSync('pnpm --config.dlx-cache-max-age=0 dlx unpeek@latest protect --out-dir '+target,{stdio:'inherit'})\"",
+    "postbuild": "node -e \"const fs=require('fs'),cp=require('child_process');const target=['.vercel/output/static/_next/static','.next/static/immutable/chunks','.next/static/chunks'].find(p=>fs.existsSync(p))||'.next/static';cp.execSync('pnpm --config.dlx-cache-max-age=0 dlx unpeek@latest protect --out-dir '+target,{stdio:'inherit'})\"",
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",

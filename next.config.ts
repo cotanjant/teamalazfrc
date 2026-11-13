@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: isVercel ? undefined : projectRoot,
   reactStrictMode: true,
   reactCompiler: true,
+  supportsImmutableAssets: false,
   images: {
     formats: ["image/avif", "image/webp"],
     unoptimized: false,
