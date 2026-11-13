@@ -5,8 +5,7 @@
   "packageManager": "pnpm@12.18.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "postbuild": "node -e \"const fs=require('fs'),cp=require('child_process');const target=['.vercel/output/static/_next/static','.next/static/immutable/chunks','.next/static/chunks'].find(p=>fs.existsSync(p))||'.next/static';cp.execSync('pnpm --config.dlx-cache-max-age=0 dlx unpeek@latest protect --out-dir '+target,{stdio:'inherit'})\"",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",
@@ -40,6 +39,12 @@
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.9",
     "typescript": "^5.8.2",
+    "unpeek": "latest",
     "vitest": "^3.0.0"
+  },
+  "pnpm": {
+    "minimumReleaseAgeExclude": [
+      "unpeek"
+    ]
   }
 }

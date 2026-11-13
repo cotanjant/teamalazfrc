@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install --no-frozen-lockfile && pnpm --config.minimum-release-age=0 add -D unpeek@latest"
+}
