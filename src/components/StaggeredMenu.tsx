@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
 
@@ -34,6 +34,8 @@ export interface StaggeredMenuProps {
   onMenuClose?: () => void;
 }
 
+const emptySubscribe = () => () => {};
+
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   position = 'right',
   colors = ['#8F1B0A', '#E83A0A', '#FF7800'],
@@ -50,7 +52,11 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   onMenuOpen,
   onMenuClose,
 }: StaggeredMenuProps) => {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
 
@@ -75,11 +81,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const toggleBtnRef = useRef<HTMLButtonElement | null>(null);
   const busyRef = useRef(false);
   const itemEntranceTweenRef = useRef<gsap.core.Tween | null>(null);
-
-  // Mount detection for client portal
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Scroll lock & Lenis pause/resume
   useEffect(() => {

@@ -86,19 +86,16 @@ const AdminShellContext = createContext<AdminShellContextType | null>(null);
 
 export function AdminShellProvider({ children }: { children: React.ReactNode }) {
   const [activeSection, setActiveSectionState] = useState<string>("home");
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return localStorage.getItem("alaz_admin_sidebar_collapsed") === "true";
+    } catch {
+      return false;
+    }
+  });
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
   const [systemMode, setSystemMode] = useState<"local" | "github">("github");
-
-  // Load collapsed state preference from localStorage if available
-  useEffect(() => {
-    try {
-      const savedCollapsed = localStorage.getItem("alaz_admin_sidebar_collapsed");
-      if (savedCollapsed !== null) {
-        setIsSidebarCollapsed(savedCollapsed === "true");
-      }
-    } catch {}
-  }, []);
 
   // Listen to hash/URL changes
   useEffect(() => {

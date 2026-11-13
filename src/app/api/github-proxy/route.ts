@@ -347,7 +347,7 @@ export async function POST(request: NextRequest) {
 
     // LOCAL DEVELOPMENT FALLBACK (Direct disk read/write)
     const localRoot = process.cwd();
-    const resolvedPath = path.resolve(localRoot, sanitizedPath);
+    const resolvedPath = path.resolve(/*turbopackIgnore: true*/ localRoot, sanitizedPath);
 
     // Security check: ensure path is inside localRoot
     if (!resolvedPath.startsWith(localRoot)) {
