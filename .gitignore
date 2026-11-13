@@ -46,3 +46,4 @@ archive
 analizler
 .vercel
 .env*
+.unpeek-maps/

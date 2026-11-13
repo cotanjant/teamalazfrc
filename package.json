@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "pnpm dlx unpeek@latest protect",
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",
