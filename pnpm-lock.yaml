@@ -268,8 +268,8 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
       unpeek:
-        specifier: latest
-        version: 1.13.0(esbuild@0.28.2)(rollup@4.64.8)(vite@7.3.7(@types/node@22.20.5)(jiti@2.7.0)(lightningcss@1.32.0))
+        specifier: ^3.0.0
+        version: 3.0.0(esbuild@0.28.2)(next@16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@types/node@22.20.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.9(react@19.2.9))(react@19.2.9))(rollup@4.64.8)(vite@7.3.7(@types/node@22.20.5)(jiti@2.7.0)(lightningcss@1.32.0))
       vitest:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.5)(jiti@2.7.0)(lightningcss@1.32.0)(supports-color@7.2.0)
@@ -3027,17 +3027,23 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
-  unpeek@1.13.0:
-    resolution: {integrity: sha512-uiJkHltO8criH+6Yb0idTLWU6txZgSfe2jG2KPLZ4EeDoZYmFjhzWIgEZEtWzoETnaEzt5Hy3+ZscmrvGIklBw==}
+  unpeek@3.0.0:
+    resolution: {integrity: sha512-c988bKbTEn4J9jgkslKNeQKzhtQeglIjI/+GUHxw8PJlQjfOoBGcOnW7RmOGj8OTLW2FLfQFhGEm9CI0dx+sqg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
-      esbuild: '>=0.18.0'
-      rollup: '>=3.0.0'
-      vite: '>=4.0.0'
-      webpack: '>=5.0.0'
+      '@rspack/core': '>=1.0.0 <2.0.0'
+      esbuild: '>=0.18.0 <1.0.0'
+      next: '>=15.0.0 <17.0.0'
+      rollup: '>=3.0.0 <5.0.0'
+      vite: '>=4.0.0 <8.0.0'
+      webpack: '>=5.0.0 <6.0.0'
     peerDependenciesMeta:
+      '@rspack/core':
+        optional: true
       esbuild:
+        optional: true
+      next:
         optional: true
       rollup:
         optional: true
@@ -5986,7 +5992,7 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  unpeek@1.13.0(esbuild@0.28.2)(rollup@4.64.8)(vite@7.3.7(@types/node@22.20.5)(jiti@2.7.0)(lightningcss@1.32.0)):
+  unpeek@3.0.0(esbuild@0.28.2)(next@16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@types/node@22.20.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.9(react@19.2.9))(react@19.2.9))(rollup@4.64.8)(vite@7.3.7(@types/node@22.20.5)(jiti@2.7.0)(lightningcss@1.32.0)):
     dependencies:
       acorn: 8.19.0
       acorn-walk: 8.3.5
@@ -5994,6 +6000,7 @@ snapshots:
       unplugin: 2.3.11
     optionalDependencies:
       esbuild: 0.28.2
+      next: 16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@types/node@22.20.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       rollup: 4.64.8
       vite: 7.3.7(@types/node@22.20.5)(jiti@2.7.0)(lightningcss@1.32.0)
 

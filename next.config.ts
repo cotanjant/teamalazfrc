@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
-import { transformJavaScript, computeFnv1aHash } from "unpeek";
+import { withUnpeek } from "unpeek/next";
 
 const projectRoot = typeof __dirname !== "undefined" ? __dirname : process.cwd();
 const isVercel = Boolean(process.env.VERCEL);
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   output:
     !isVercel && (process.env.BUILD_STANDALONE || (process.platform !== "win32" && process.env.NODE_ENV === "production"))
       ? "standalone"
@@ -16,60 +16,6 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     unoptimized: false,
-  },
-  webpack: (config, { dev, isServer, webpack }) => {
-    if (!dev && !isServer) {
-      const baseSeed = Math.floor(Math.random() * 2147483647) || 322420463;
-      interface WebpackCompilation {
-        hooks: {
-          processAssets: {
-            tap(
-              opts: { name: string; stage: number },
-              cb: (assets: Record<string, unknown>) => void
-            ): void;
-          };
-        };
-        getAsset(name: string): { source: { source(): string | Buffer } } | undefined;
-        updateAsset(name: string, source: unknown): void;
-      }
-      interface WebpackCompiler {
-        hooks: {
-          thisCompilation: {
-            tap(name: string, cb: (compilation: WebpackCompilation) => void): void;
-          };
-        };
-      }
-      config.plugins.push({
-        name: "unpeek-nextjs-assets",
-        apply(compiler: WebpackCompiler) {
-          compiler.hooks.thisCompilation.tap("unpeek-nextjs-assets", (compilation) => {
-            compilation.hooks.processAssets.tap(
-              {
-                name: "unpeek-nextjs-assets",
-                stage: webpack.Compilation.PROCESS_ASSETS_STAGE_REPORT,
-              },
-              (assets) => {
-                for (const name of Object.keys(assets)) {
-                  if (!name.endsWith(".js") || !name.startsWith("static/chunks/")) continue;
-                  const asset = compilation.getAsset(name);
-                  if (!asset) continue;
-                  const code = asset.source.source().toString();
-                  const seed = computeFnv1aHash(name, baseSeed);
-                  const result = transformJavaScript(code, {
-                    seed,
-                    filename: name,
-                    injectRuntimeShield: true,
-                    deterrentMode: "gradual",
-                  });
-                  compilation.updateAsset(name, new webpack.sources.RawSource(result.code));
-                }
-              }
-            );
-          });
-        },
-      });
-    }
-    return config;
   },
   async headers() {
     return [
@@ -100,6 +46,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-};
+} satisfies NextConfig;
 
-export default nextConfig;
+export default withUnpeek(nextConfig, {
+  deterrentMode: "gradual",
+  injectRuntimeShield: true,
+});
